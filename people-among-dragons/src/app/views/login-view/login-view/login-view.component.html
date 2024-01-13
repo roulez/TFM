@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>People among Dragons</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <main>
+    <section class="main-section">
+        <div class="main-container">
+            <h1 class="main-text">People among Dragons</h1>
+            <form [formGroup]="_loginForms" class="form-container" method="post">
+                <!--Input for user email-->
+                <label class="bolded-text form-label" for="femail">Email<span class="main-text">*</span></label>
+                <input [(ngModel)]="_userEmail" formControlName="_emailControl" class="form-input form-control" type="email" id="femail" name="femail" placeholder="Type your email..." required>
+                <span class="error-text" *ngIf="_showEmailError">Incorrect email</span>
+                <br>
+                <br>
+                <!--Input for user password-->
+                <label class="bolded-text form-label" for="fpass">Password<span class="main-text">*</span></label>
+                <input [(ngModel)]="_userPassword" [formControl]="_emailControl" class="form-input" type="password" id="fpass" name="fpass" placeholder="Type your password..." required>
+                <span class="error-text" *ngIf="_showPasswordError">Incorrect password</span>
+                <br>
+                <br>
+                <!--Login button-->
+                <button class="send-button" (click)="checkLoginData()">Login</button>
+            </form>
+        </div>
+    </section>
+  </main>
+  <app-footer></app-footer>
+</body>
+</html>

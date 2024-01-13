@@ -1,0 +1,57 @@
+/*Main section style*/
+.main-section {
+    background-color: violet;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px; 
+}
+  
+  /*Main container style*/
+.main-container {
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 450px; 
+}
+  
+.form-container {
+    text-align: start; 
+}
+  
+/*Form header style*/
+.main-text {
+    color: violet; 
+}
+  
+/*Form inputs style*/
+.form-input {
+    border: 0.5px solid violet;
+    border-radius: 6px;
+    padding: 15px;
+    width: 90%; 
+}
+  
+.form-label {
+    padding: 5px; 
+}
+  
+/*Login button style*/
+.send-button {
+    border: none;
+    border-radius: 6px;
+    padding: 5px;
+    background-color: violet;
+    color: white;
+    cursor: pointer;
+    width: 90%; 
+}
+  
+.bolded-text {
+    font-weight: bold; 
+}
+  
+.error-text {
+    color: red;
+} 
