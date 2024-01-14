@@ -58,18 +58,7 @@
     background-color: rgb(9, 161, 216);
     color: white;
     cursor: pointer;
-    width: 90%;
-    margin-right: 5px;
-}
-
-.secondary-button {
-    border: 1px black solid;
-    border-radius: 6px;
-    padding: 5px;
-    background-color: white;
-    color: black;
-    cursor: pointer;
-    width: 90%;
+    width: 100%;
 }
   
 .bolded-text {

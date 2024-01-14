@@ -13,6 +13,18 @@
         <div class="main-container">
             <h1 class="main-text">People among Dragons</h1>
             <form [formGroup]="_loginForms" class="form-container" method="post">
+                <!--Input for user name-->
+                <label class="bolded-text form-label" for="fname">Name<span class="main-text">*</span></label>
+                <input [(ngModel)]="_userName" [formControl]="_nameControl" class="form-input form-control" type="text" id="fname" name="fname" placeholder="Type your name..." required>
+                <span class="error-text" *ngIf="_showNameError">User name is required</span>
+                <br>
+                <br>
+                <!--Input for user surnmae-->
+                <label class="bolded-text form-label" for="fsurname">Surname<span class="main-text">*</span></label>
+                <input [(ngModel)]="_userSurname" [formControl]="_surnameControl" class="form-input form-control" type="text" id="fsurname" name="fsurname" placeholder="Type your surname..." required>
+                <span class="error-text" *ngIf="_showSurnameError">User surname is required</span>
+                <br>
+                <br>
                 <!--Input for user email-->
                 <label class="bolded-text form-label" for="femail">Email<span class="main-text">*</span></label>
                 <input [(ngModel)]="_userEmail" [formControl]="_emailControl" formControlName="_emailControl" class="form-input form-control" type="email" id="femail" name="femail" placeholder="Type your email..." required>
@@ -27,8 +39,7 @@
                 <br>
                 <!--Login button-->
                 <div class="flex-container">
-                  <button class="send-button" (click)="checkLoginData()">Login</button>
-                  <button class="secondary-button" (click)="registerAccount()">Register</button>
+                  <button class="send-button" (click)="registerAccount()">Register</button>
                 </div>
             </form>
         </div>
