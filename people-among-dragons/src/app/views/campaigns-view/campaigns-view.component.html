@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>People among Dragons</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <app-header></app-header>
+  <div class="campaign-header">
+    <h2 class="campaign-header-text">My Campaigns</h2>
+    <button class="create-button" (click)="createCampaign()">Create Campaign</button>
+  </div>
+  <hr class="separator-line">
+  <div class="campaign-list">
+    <div class="campaign-wrapper">
+        <div class="campaign-container">
+            <div class="campaign-container-header">
+                <img class="campaign-image" src="../../../assets/images/login-screen.jpg" alt="Campaign1">
+                <h3>Test campaign</h3>
+            </div>
+            <div class="campaign-container-footer">
+                <button class="campaign-buttons">VIEW</button>
+                <button class="campaign-buttons">EDIT</button>
+                <button class="campaign-buttons">COPY</button>
+                <button class="campaign-important-buttons">DELETE</button>
+            </div>
+        </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</body>
+</html>

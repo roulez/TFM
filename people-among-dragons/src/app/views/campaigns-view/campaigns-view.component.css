@@ -1,0 +1,68 @@
+
+.campaign-header {
+    display: flex;
+    width: 100%;
+    height: 5%;
+    margin-top: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.campaign-header-text {
+    margin-left: 25px;
+}
+
+.create-button {
+    color: white;
+    background-color: rgb(26, 191, 224);
+    border: 0.15px black solid;
+    width: 10%;
+    height: 90%;
+    margin-right: 25px;
+    cursor: pointer;
+}
+
+.campaign-list {
+    height: 80%;
+}
+
+.campaign-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.campaign-container {
+    width: 33%;
+    margin-top: 15px;
+    border: 0.5px black solid;
+}
+
+.campaign-container-header {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.campaign-image {
+    width: 150px;
+    margin-right: 15px;
+}
+
+.campaign-container-footer {
+    display: flex;
+    width: 100%;
+}
+
+.campaign-buttons {
+    width: 25%;
+    color: black;
+    cursor: pointer;
+}
+
+.campaign-important-buttons {
+    width: 25%;
+    color: red;
+    cursor: pointer;
+}

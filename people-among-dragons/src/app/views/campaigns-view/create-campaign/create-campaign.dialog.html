@@ -1,0 +1,18 @@
+<section class="main-section">
+    <div class="main-container">
+        <h1 class="main-text">People among Dragons</h1>
+        <form class="form-container" method="post">
+            <!--Input for user email-->
+            <label class="bolded-text form-label" for="fcampaign">Campaign name<span class="main-text">*</span></label>
+            <input [(ngModel)]="_campaignName" type="text" id="fcampaign" name="fcampaign" placeholder="Type your campaign name..." required>
+            <span class="error-text" *ngIf="_showNameError">The campaign name must be filled</span>
+            <br>
+            <br>
+            <!--Login button-->
+            <div class="flex-container">
+              <button mat-button class="send-button" (click)="createCampaign()">Create</button>
+              <button mat-button class="secondary-button" (click)="closeDialog()">Close</button>
+            </div>
+        </form>
+    </div>
+</section>

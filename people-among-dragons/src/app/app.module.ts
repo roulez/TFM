@@ -3,12 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginViewComponent } from './views/login-view/login-view/login-view.component';
-import { HeaderComponent } from './header/header/header.component';
-import { FooterComponent } from './footer/footer/footer.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MainViewComponent } from './views/main-view/main-view/main-view.component';
-import { RegisterViewComponent } from './views/register-view/register-view/register-view.component';
+import { LoginViewComponent } from './views/login-view/login-view.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MainViewComponent } from './views/main-view/main-view.component';
+import { RegisterViewComponent } from './views/register-view/register-view.component';
+import { CampaignsViewComponent } from './views/campaigns-view/campaigns-view.component';
+import { CreateCampaignDialog } from './views/campaigns-view/campaigns-view.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -17,12 +21,17 @@ import { RegisterViewComponent } from './views/register-view/register-view/regis
     HeaderComponent,
     FooterComponent,
     MainViewComponent,
-    RegisterViewComponent
+    RegisterViewComponent,
+    CampaignsViewComponent,
+    CreateCampaignDialog
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

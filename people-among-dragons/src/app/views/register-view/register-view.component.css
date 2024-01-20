@@ -1,0 +1,70 @@
+/*Main section style*/
+.main-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90%;
+    background: url("../../../assets/images/login-screen.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.main-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px; 
+    height: 90%;
+    width: 100%;
+}
+  
+  /*Main container style*/
+.main-container {
+    border: 1px black solid;
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 450px; 
+}
+  
+.form-container {
+    text-align: start; 
+}
+  
+/*Form header style*/
+.main-text {
+    color: red; 
+}
+  
+/*Form inputs style*/
+.form-input {
+    border: 0.5px solid black;
+    border-radius: 6px;
+    padding: 15px;
+    width: 90%; 
+}
+  
+.form-label {
+    padding: 5px; 
+}
+  
+/*Login button style*/
+.send-button {
+    border: 1px black solid;
+    border-radius: 6px;
+    padding: 5px;
+    background-color: rgb(9, 161, 216);
+    color: white;
+    cursor: pointer;
+    width: 100%;
+}
+  
+.bolded-text {
+    font-weight: bold; 
+}
+  
+.error-text {
+    color: red;
+} 
