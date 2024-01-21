@@ -1,18 +1,29 @@
-<section class="main-section">
-    <div class="main-container">
-        <h1 class="main-text">People among Dragons</h1>
-        <form class="form-container" method="post">
-            <!--Input for user email-->
-            <label class="bolded-text form-label" for="fcampaign">Campaign name<span class="main-text">*</span></label>
-            <input [(ngModel)]="_campaignName" type="text" id="fcampaign" name="fcampaign" placeholder="Type your campaign name..." required>
-            <span class="error-text" *ngIf="_showNameError">The campaign name must be filled</span>
-            <br>
-            <br>
-            <!--Login button-->
-            <div class="flex-container">
-              <button mat-button class="send-button" (click)="createCampaign()">Create</button>
-              <button mat-button class="secondary-button" (click)="closeDialog()">Close</button>
+<main class="main-wrapper">
+    <section class="main-section">
+        <div class="main-container">
+            <h3 class="main-text">People among Dragons</h3>
+            <div class="form-container">
+                <label class="bolded-text form-label" for="fcampaign">Campaign name<span class="main-text">*</span></label>
+                <input [(ngModel)]="_campaignName" type="text" id="fcampaign" name="fcampaign" placeholder="Type your campaign name..." required>
+                <span class="error-text" *ngIf="_showNameError">The campaign name must be filled</span>
+                <br>
+                <br>
+                <!--Checkbox for campaign visibility-->
+                <mat-checkbox [(ngModel)]="_isPrivateCampaign">Private Campaign</mat-checkbox>
+                <br>
+                <br>
+                <!--We only show the password fields if it is a private campaign-->
+                <label *ngIf="_isPrivateCampaign" class="bolded-text form-label" for="fpassword">Campaign password<span class="main-text">*</span></label>
+                <input *ngIf="_isPrivateCampaign" [(ngModel)]="_campaignPassword" type="password" id="fpassword" name="fpassword" placeholder="Type your campaign password..." required>
+                <br *ngIf="_isPrivateCampaign">
+                <span class="error-text" *ngIf="_showPasswordError">The campaign password must be filled</span>
+                <br *ngIf="_isPrivateCampaign">
+                <br *ngIf="_isPrivateCampaign">
+                <div class="flex-container">
+                    <button mat-button class="send-button" (click)="createCampaign()">Create</button>
+                    <button mat-button class="secondary-button" (click)="closeDialog()">Close</button>
+                </div>
             </div>
-        </form>
-    </div>
-</section>
+        </div>
+    </section>
+</main>

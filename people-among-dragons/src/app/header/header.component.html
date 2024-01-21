@@ -1,10 +1,8 @@
 <!--Main page header-->
 <header class="main-header">
     <h2 class="header-text">People among Dragons</h2>
-    <!--Header elements-->
-    <svg class="header-image bordered end-align" viewBox="0 0 100 80">
-        <rect class="header-subimage"></rect>
-        <rect class="header-subimage" y="30"></rect>
-        <rect class="header-subimage" y="60"></rect>
-    </svg>
+    <div class="header-links">
+        <button class="page-link navigation-button " (click)="showCampaigns()">My campaigns</button>
+        <button class="page-link exit-button" (click)="logout()">Logout</button>
+    </div>
 </header>

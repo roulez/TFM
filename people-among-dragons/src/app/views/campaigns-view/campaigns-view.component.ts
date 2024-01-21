@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Campaign } from 'src/models/campaign';
 
 @Component({
   selector: 'app-campaigns-view',
@@ -21,7 +22,9 @@ export class CampaignsViewComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      //If the user has created a campaign
+      if(result != undefined)
+        console.log(result);
     });
   }
 
@@ -36,12 +39,25 @@ export class CreateCampaignDialog {
   
   _campaignName: string = "";
   _showNameError: boolean = false;
+  _isPrivateCampaign: boolean = false;
+  _campaignPassword: string = "";
+  _showPasswordError: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<CreateCampaignDialog>
   ) {}
 
-  createCampaign(): void{
+  createCampaign(): void {
+    this._showNameError = false;
+    this._showPasswordError = false;
+    if(this._campaignName === "")
+      this._showNameError = true;
+    else if (this._isPrivateCampaign && this._campaignPassword === "")
+      this._showPasswordError = true;
+    else {
+      var newCampaign = new Campaign(this._campaignName, this._isPrivateCampaign, this._campaignPassword);
+      this.dialogRef.close(newCampaign);
+    }
   }
 
   closeDialog(): void{

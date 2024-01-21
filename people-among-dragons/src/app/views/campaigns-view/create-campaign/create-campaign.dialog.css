@@ -1,19 +1,24 @@
+.main-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .main-section {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 15px; 
     height: 90%;
     width: 100%;
 }
-  
+
 .main-container {
     border: 1px black solid;
     text-align: center;
     background-color: white;
     padding: 10px;
     border-radius: 5px;
-    max-width: 450px; 
+    width: 100%; 
 }
   
 .form-container {
