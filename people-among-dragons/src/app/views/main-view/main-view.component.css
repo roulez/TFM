@@ -51,3 +51,9 @@
     margin-top: 5px;
     text-align: left;
 }
+
+.footer-text {
+    color: grey;
+    text-align: right;
+    margin-right: 10px;
+}

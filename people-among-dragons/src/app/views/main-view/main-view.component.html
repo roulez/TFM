@@ -11,14 +11,15 @@
   <app-header></app-header>
   <div class="main-wrapper">
     <div class="main-container">
-      <div class="publication-wrapper">
+      <div class="publication-wrapper" *ngFor="let publication of _publications">
         <div class="publication-container">
           <div class="publication-container-header">
-            <img class="publication-image" src="../../../assets/images/login-screen.jpg" alt="Campaign1">
-            <h3>Test campaign</h3>
+            <img class="publication-image" [src]="publication._publicationImage" alt="PublicationImage">
+            <h3>{{publication._publicationTitle}}</h3>
           </div>
           <div class="publication-content">
-            <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum rhoncus mi a erat cursus malesuada. Nullam vel ligula nisi. Maecenas dictum aliquet dui nec lacinia. Aenean posuere elit tellus, nec aliquam urna porttitor sit amet. Fusce vitae dolor dictum, cursus eros vel, luctus nulla. Fusce suscipit justo vel sem fermentum convallis. In elementum nisi ac placerat ullamcorper. Nullam eget faucibus est. Morbi luctus lectus dolor, quis cursus tortor finibus sed. Phasellus aliquam dictum facilisis. Nulla facilisis enim sit amet ante dapibus, vel vestibulum sem venenatis. Nam commodo mauris nec laoreet feugiat.</h3>
+            <h3>{{publication._publicationText}}</h3>
+            <p class="footer-text">Created by: {{publication._userName}} - {{formatDateAsString(publication._publicationDate)}}</p>
           </div>
         </div>   
       </div>
