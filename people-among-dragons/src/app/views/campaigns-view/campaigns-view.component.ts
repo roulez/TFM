@@ -15,6 +15,10 @@ export class CampaignsViewComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  openCampaign(): void{
+    this.router.navigate(['/tabletop']);
+  }
+
   createCampaign(): void{
     const dialogRef = this.dialog.open(CreateCampaignDialog, {
       width: '20%',

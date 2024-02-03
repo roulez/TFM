@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>People among Dragons</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <app-header></app-header>
+  <div class="main-wrapper">
+    <div class="main-container">
+        <div class="text-container">
+            <p class="private-message system-message">* Welcome to the tabletop for the campaign: {{_campaignName}}</p>
+            <p *ngFor="let _chatMessage of _chatMessages" [ngClass]="_chatMessage._isPrivate ? 'private-message' : ''">*{{_chatMessage._userName}} typed: {{_chatMessage._message}}</p>
+        </div>
+        <div>
+            <div class="tabletop-footer">
+                <div class="footer-button-container">
+                    <input class="number-roll" [(ngModel)]="_numberOfRolls" type="number">
+                    <button class="tabletop-buttons" matTooltip="Rolls a 20 sided dice" (click)="rollDice(20)">d20</button>
+                    <button class="tabletop-buttons" matTooltip="Rolls a 12 sided dice" (click)="rollDice(12)">d12</button>
+                    <button class="tabletop-buttons" matTooltip="Rolls a 10 sided dice" (click)="rollDice(10)">d10</button>
+                    <button class="tabletop-buttons" matTooltip="Rolls a 8 sided dice" (click)="rollDice(8)">d8</button>
+                    <button class="tabletop-buttons" matTooltip="Rolls a 6 sided dice" (click)="rollDice(6)">d6</button>
+                    <button class="tabletop-buttons" matTooltip="Rolls a 4 sided dice" (click)="rollDice(4)">d4</button>
+                    <button class="tabletop-buttons" matTooltip="Rolls a 100 sided dice" (click)="rollDice(100)">d100</button>
+                </div>
+                <mat-checkbox [(ngModel)]="_sendPrivateMessage">Private</mat-checkbox>
+            </div>
+            <div class="tabletop-footer">
+                <input [(ngModel)]="_userMessage" class="chat-text-input" type="text" placeholder="Type in the chat...">
+                <button class="tabletop-buttons" (click)="sendMessage()">Send</button>
+            </div>
+        </div>     
+    </div>
+  </div>
+  <app-footer></app-footer>
+</body>
+</html>

@@ -14,6 +14,9 @@ import { CreateCampaignDialog } from './views/campaigns-view/campaigns-view.comp
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { TabletopViewComponent } from './views/tabletop-view/tabletop-view.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MainViewComponent,
     RegisterViewComponent,
     CampaignsViewComponent,
-    CreateCampaignDialog
+    CreateCampaignDialog,
+    TabletopViewComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +37,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     FormsModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTooltipModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
