@@ -14,7 +14,8 @@
 }
 
 .header-text {
-    margin-left: 10px; 
+    margin-left: 10px;
+    cursor: pointer;
 }
 
 .navigation-button {

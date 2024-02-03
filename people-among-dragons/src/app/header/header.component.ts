@@ -13,6 +13,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  moveToMain(): void{
+    this.router.navigate(['/main']);
+  }
+
   showCampaigns(): void{
     this.router.navigate(['/campaigns']);
   }
