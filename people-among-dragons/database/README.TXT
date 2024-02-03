@@ -1,0 +1,1 @@
+In this folder you can find the SQL scripts required in order to create and fill with some sample data the database.
