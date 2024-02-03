@@ -1,0 +1,53 @@
+.main-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+    height: 100%;
+    background: url("../../../assets/images/login-screen.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.main-container {
+    border: 1px black solid;
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    width: 95%;
+    height: 95%;
+    overflow: auto;
+}
+
+.publication-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.publication-container {
+    width: 100%;
+    height: 25%;
+    margin-top: 15px;
+    border: 0.5px black solid;
+}
+
+.publication-container-header {
+    display: flex;
+    padding: 5px;
+    border: 1px black solid;
+    align-items: center;
+}
+
+.publication-image {
+    width: 150px;
+    margin-right: 15px;
+}
+
+.publication-content {
+    margin-top: 5px;
+    text-align: left;
+}
