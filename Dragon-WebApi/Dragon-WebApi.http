@@ -1,0 +1,6 @@
+@Dragon_WebApi_HostAddress = http://localhost:5159
+
+GET {{Dragon_WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

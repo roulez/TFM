@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "oVykFEE12IdaihGzY1NQ6Z8lNhZLqwmXyMxTufdsarzOyGimV619yOULZdyEyZgU6C2lFTNNy0PLJCvtfh2DOA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\roule\\Documents\\Master\\ProyectoTFM\\TFM\\Dragon-WebApi\\Dragon-WebApi.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\roule\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\roule\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\roule\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
+    "C:\\Users\\roule\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
+    "C:\\Users\\roule\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
+    "C:\\Users\\roule\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}
