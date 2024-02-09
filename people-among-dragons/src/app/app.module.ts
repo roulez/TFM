@@ -17,6 +17,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TabletopViewComponent } from './views/tabletop-view/tabletop-view.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatDialogModule,
     MatCheckboxModule,
     MatTooltipModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

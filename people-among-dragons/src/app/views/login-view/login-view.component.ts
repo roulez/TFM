@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { WebApiService } from 'src/services/webapi-service';
 
 @Component({
   selector: 'app-login-view',
@@ -17,7 +18,7 @@ export class LoginViewComponent implements OnInit {
   _passwordControl: FormControl = new FormControl();
   _loginForms = new FormGroup({ _emailControl: this._emailControl });
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private webApiService: WebApiService) { }
 
   ngOnInit(): void {
   }
