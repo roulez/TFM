@@ -1,5 +1,7 @@
+USE peopleamongdragons;
+
 CREATE TABLE Users (
-    Id int NOT NULL AUTO_INCREMENT,
+    Id int NOT NULL IDENTITY(1,1),
     UserEmail varchar(255) NOT NULL,
     UserPassword varchar(255) NOT NULL,
     UserName varchar(255) NOT NULL,
@@ -8,7 +10,7 @@ CREATE TABLE Users (
 );
 
 CREATE TABLE Publications (
-    Id int NOT NULL AUTO_INCREMENT,
+    Id int NOT NULL IDENTITY(1,1),
     PublicationTitle varchar(255) NOT NULL,
     PublicationText TEXT NOT NULL,
     PublicationImage varchar(255),
@@ -19,7 +21,7 @@ CREATE TABLE Publications (
 );
 
 CREATE TABLE Campaigns (
-    Id int NOT NULL AUTO_INCREMENT,
+    Id int NOT NULL IDENTITY(1,1),
     CampaignName varchar(255) NOT NULL,
     CampaignImage varchar(255),
     UserId int NOT NULL,
@@ -29,7 +31,7 @@ CREATE TABLE Campaigns (
 );
 
 CREATE TABLE CampaignsUsers (
-    Id int NOT NULL AUTO_INCREMENT,
+    Id int NOT NULL IDENTITY(1,1),
     UserId int NOT NULL,
     CampaignId int NOT NULL,
     PRIMARY KEY (Id),
@@ -38,7 +40,7 @@ CREATE TABLE CampaignsUsers (
 );
 
 CREATE TABLE Messages (
-    Id int NOT NULL AUTO_INCREMENT,
+    Id int NOT NULL IDENTITY(1,1),
     MessageTitle varchar(255) NOT NULL,
     MessageText varchar(255) NOT NULL,
     SendingUserId int NOT NULL,

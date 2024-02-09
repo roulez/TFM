@@ -16,6 +16,6 @@ INSERT INTO CampaignsUsers (UserId, CampaignId) Values (2, 2);
 INSERT INTO CampaignsUsers (UserId, CampaignId) Values (1, 2);
 
 --Insert Sample Messages
-INSERT INTO Messages (MessageTitle, MessageText, SendingUserId, ReceivingUserId, CreationDate) Values ("First Message!", "This is my first message", 2, 1, CURRENT_TIMESTAMP);
-INSERT INTO Messages (MessageTitle, MessageText, SendingUserId, ReceivingUserId, CreationDate) Values ("First Message!", "This is my first message", 1, 2, CURRENT_TIMESTAMP);
-INSERT INTO Messages (MessageTitle, MessageText, SendingUserId, ReceivingUserId, CreationDate) Values ("Second Message!", "This is my second message", 2, 1, CURRENT_TIMESTAMP);
+INSERT INTO Messages (MessageTitle, MessageText, SendingUserId, ReceivingUserId, CreationDate) Values ('First Message!', 'This is my first message', 2, 1, CURRENT_TIMESTAMP);
+INSERT INTO Messages (MessageTitle, MessageText, SendingUserId, ReceivingUserId, CreationDate) Values ('First Message!', 'This is my first message', 1, 2, CURRENT_TIMESTAMP);
+INSERT INTO Messages (MessageTitle, MessageText, SendingUserId, ReceivingUserId, CreationDate) Values ('Second Message!', 'This is my second message', 2, 1, CURRENT_TIMESTAMP);
