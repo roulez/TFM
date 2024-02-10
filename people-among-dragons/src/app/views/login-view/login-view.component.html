@@ -9,6 +9,14 @@
 </head>
 <body>
   <main class="main-wrapper">
+    <div *ngIf="_isLoading" class="spinner-overlay">
+      <div class="spinner-wrapper">
+        <div>
+          <mat-spinner></mat-spinner>
+          <p class="loading-text">Login into the server...</p>
+        </div>
+      </div>
+    </div>
     <section class="main-section">
         <div class="main-container">
             <h1 class="main-text">People among Dragons</h1>

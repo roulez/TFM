@@ -15,6 +15,7 @@ export class LoginViewComponent implements OnInit {
   _userPassword: string = "";
   _showEmailError: boolean = false;
   _showPasswordError: boolean = false;
+  _isLoading: boolean = false;
   _emailControl: FormControl = new FormControl('',[Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]);
   _passwordControl: FormControl = new FormControl();
   _loginForms = new FormGroup({ _emailControl: this._emailControl });
@@ -33,8 +34,10 @@ export class LoginViewComponent implements OnInit {
     else if(this._userPassword === "")
       this._showPasswordError = true;
     else{
+      this._isLoading = true;
       var loginObservable = this.webApiService.isValidLoginData(this._userEmail, this._userPassword);
       var loginResult = await lastValueFrom(loginObservable);
+      this._isLoading = false;
       if(!loginResult.IsEmailCorrect)
         this._showEmailError = true;
       else if(!loginResult.IsPasswordCorrect)
