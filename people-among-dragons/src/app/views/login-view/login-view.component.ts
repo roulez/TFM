@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { lastValueFrom } from 'rxjs';
 import { WebApiService } from 'src/services/webapi-service';
 
 @Component({
@@ -23,15 +24,24 @@ export class LoginViewComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  checkLoginData(): void{
+  async checkLoginData(): Promise<void>{
     this._showEmailError = false;
-    this._showPasswordError = false;
+    this._showPasswordError = false;   
+
     if(this._loginForms.invalid)
       this._showEmailError = true;
-    else if(this._userPassword.length < 8)
+    else if(this._userPassword === "")
       this._showPasswordError = true;
-    else
-      this.router.navigate(['/main']);  
+    else{
+      var loginObservable = this.webApiService.isValidLoginData(this._userEmail, this._userPassword);
+      var loginResult = await lastValueFrom(loginObservable);
+      if(!loginResult.IsEmailCorrect)
+        this._showEmailError = true;
+      else if(!loginResult.IsPasswordCorrect)
+        this._showPasswordError = true;
+      else
+        this.router.navigate(['/main']);
+    }
   }
 
   registerAccount(): void{
