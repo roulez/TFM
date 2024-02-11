@@ -15,6 +15,11 @@ export class WebApiService {
         return this.wepApiClient.post(this.getWebApiUrl() + 'User/IsValidLogin?userEmail=' + userEmail + "&userPassword=" + userPassword , "", this._httpOptions).pipe(map(response => Object.assign(new LoginResult(), response)));
     }
 
+    registerUser(userEmail: string, userPassword: string, userName: string, userSurname: string) {
+        return this.wepApiClient.post(this.getWebApiUrl() + 'User/RegisterUser?userEmail=' + userEmail + "&userPassword=" + userPassword + "&userName=" + userName + "&userSurname=" + userSurname  ,
+             "", this._httpOptions).pipe(map(response => response));
+    }
+
     getWebApiUrl(): string {
         return "http://localhost:5159/api/";
     }

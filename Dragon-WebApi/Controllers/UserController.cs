@@ -27,5 +27,13 @@ namespace Dragon_WebApi.Controllers
             var result = _userDataAccess.IsValidLogin(userEmail, userPassword);
             return JsonConvert.SerializeObject(result);
         }
+
+        [Route("RegisterUser")]
+        [HttpPost]
+        public string RegisterUser(string userEmail, string userPassword, string userName, string userSurname)
+        {
+            var result = _userDataAccess.RegisterUser(userEmail, userPassword, userName, userSurname);
+            return JsonConvert.SerializeObject(result);
+        }
     }
 }

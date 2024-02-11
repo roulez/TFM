@@ -35,5 +35,23 @@ namespace Dragon_WebApi.DataAccess
 
             return loginResult;
         }
+
+        public bool RegisterUser(string userEmail, string userPassword, string userName, string userSurname)
+        {
+            var userEmailExistsQuery = _connection.Query<User>($@"
+                            SELECT
+                            UserEmail
+                            FROM Users
+                            WHERE UserEmail='{userEmail}';").FirstOrDefault();
+
+            if (userEmailExistsQuery != null)
+                return false;
+            else
+            {
+                _connection.Query($@"INSERT INTO Users (UserEmail, UserPassword, UserName, UserSurname)
+                    Values ('{userEmail}', '{userPassword}', '{userName}', '{userSurname}');");
+                return true;
+            }
+        }
     }
 }

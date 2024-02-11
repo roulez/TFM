@@ -9,7 +9,15 @@
 </head>
 <body>
   <main class="main-wrapper">
-    <section class="main-section">
+    <div *ngIf="_isLoading" class="spinner-overlay">
+      <div class="spinner-wrapper">
+        <div>
+          <mat-spinner></mat-spinner>
+          <p class="loading-text">Registering user...</p>
+        </div>
+      </div>
+    </div>
+    <section *ngIf="!_showSuccessMesage" class="main-section">
         <div class="main-container">
             <h1 class="main-text">People among Dragons</h1>
             <form [formGroup]="_loginForms" class="form-container" method="post">
@@ -29,6 +37,7 @@
                 <label class="bolded-text form-label" for="femail">Email<span class="main-text">*</span></label>
                 <input [(ngModel)]="_userEmail" [formControl]="_emailControl" formControlName="_emailControl" class="form-input form-control" type="email" id="femail" name="femail" placeholder="Type your email..." required>
                 <span class="error-text" *ngIf="_showEmailError">Incorrect email</span>
+                <span class="error-text" *ngIf="_showEmailExistsError">Email is already used</span>
                 <br>
                 <br>
                 <!--Input for user password-->
@@ -44,6 +53,15 @@
             </form>
         </div>
     </section>
+    <section *ngIf="_showSuccessMesage" class="main-section">
+      <div class="main-container">
+          <h1 class="main-text">People among Dragons</h1>
+          <p>User sucessfully registered!</p>
+          <div class="flex-container">
+            <button class="send-button" (click)="loginUser()">Login</button>
+          </div>
+      </div>
+  </section>
   </main>
   <app-footer></app-footer>
 </body>
