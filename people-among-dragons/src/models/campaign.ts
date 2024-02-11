@@ -1,11 +1,11 @@
 export class Campaign {
+    _campaignId: number;
     _campaignName: string;
-    _isPrivate: boolean;
-    _campaignPassword: string;
+    _campaignImage: string;
 
-    constructor(campaignName: string, isPrivate: boolean, campaignPassword: string){
+    constructor(campaignId: number, campaignName: string, campaignImage: string){
+        this._campaignId = campaignId;
         this._campaignName = campaignName;
-        this._isPrivate = isPrivate;
-        this._campaignPassword = campaignPassword;
+        this._campaignImage = campaignImage;
     }
 }

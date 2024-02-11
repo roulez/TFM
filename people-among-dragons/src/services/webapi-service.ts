@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
+import { CampaignResponse } from 'src/models/campaign-response';
 import { LoginResult } from 'src/models/loginResult';
 import { PublicationResponse } from 'src/models/publication-response';
 
@@ -23,6 +24,10 @@ export class WebApiService {
 
     getPublications() {
         return this.wepApiClient.get(this.getWebApiUrl() + 'Publication/GetPublications', this._httpOptions).pipe(map(response => Object.assign(new Array<PublicationResponse>(), response)));
+    }
+
+    getUserCampaigns(userId: number) {
+        return this.wepApiClient.get(this.getWebApiUrl() + 'Campaign/GetUserCampaigns?userId=' + userId, this._httpOptions).pipe(map(response => Object.assign(new Array<CampaignResponse>(), response)));
     }
 
     getWebApiUrl(): string {

@@ -9,6 +9,14 @@
 </head>
 <body>
   <app-header></app-header>
+  <div *ngIf="_isLoading" class="spinner-overlay">
+    <div class="spinner-wrapper">
+      <div>
+        <mat-spinner></mat-spinner>
+        <p class="loading-text">Loading campaigns...</p>
+      </div>
+    </div>
+  </div>
   <div class="campaign-header">
     <h2 class="campaign-header-text">My Campaigns</h2>
     <button class="create-button" (click)="createCampaign()">Create Campaign</button>
@@ -16,10 +24,10 @@
   <hr class="separator-line">
   <div class="campaign-list">
     <div class="campaign-wrapper">
-        <div class="campaign-container">
+        <div class="campaign-container" *ngFor="let campaign of _campaigns">
             <div class="campaign-container-header">
-                <img class="campaign-image" src="../../../assets/images/login-screen.jpg" alt="Campaign1">
-                <h3>Test campaign</h3>
+                <img class="campaign-image" [src]="campaign._campaignImage" alt="CampaignImage">
+                <h3>{{campaign._campaignName}}</h3>
             </div>
             <div class="campaign-container-footer">
                 <button class="campaign-buttons" (click)="openCampaign()">VIEW</button>

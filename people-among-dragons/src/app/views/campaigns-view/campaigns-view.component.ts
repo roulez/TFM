@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Campaign } from 'src/models/campaign';
+import { WebApiService } from 'src/services/webapi-service';
+import { lastValueFrom } from 'rxjs';
+import { CampaignResponse } from 'src/models/campaign-response';
+import { CreatedCampaign } from 'src/models/created-campaign';
 
 @Component({
   selector: 'app-campaigns-view',
@@ -9,11 +13,35 @@ import { Campaign } from 'src/models/campaign';
   styleUrls: ['./campaigns-view.component.css']
 })
 export class CampaignsViewComponent implements OnInit {
+  _currentUserId: number = 0;
+  _campaigns: Array<Campaign> = [];
+  _isLoading: boolean = false;
 
-  constructor(private router: Router, public dialog: MatDialog) { }
+  constructor(private router: Router, public dialog: MatDialog, private webApiService: WebApiService) { }
 
   ngOnInit(): void {
+    var loggedUserId = localStorage.getItem("LoggedUserId");
+    this._currentUserId = loggedUserId != undefined ? parseFloat(loggedUserId as string) : 0;
+    if(this._currentUserId != 0)
+      this.loadCampaigns();
   }
+
+  async loadCampaigns(): Promise<void> {
+    this._isLoading = true;
+    var campaignsObservable = this.webApiService.getUserCampaigns(this._currentUserId);
+    var campaignsResult = await lastValueFrom(campaignsObservable);
+    for(let campaign of campaignsResult)
+      this._campaigns.push(this.mapResponseToCampaign(campaign));
+    this._isLoading = false;
+  }
+
+  mapResponseToCampaign(campaignResponse: CampaignResponse) : Campaign {
+    var campaignItem = new Campaign(0,"","",);
+    campaignItem._campaignId = campaignResponse.Id;
+    campaignItem._campaignName = campaignResponse.CampaignName;
+    campaignItem._campaignImage = campaignResponse.CampaignImage;
+    return campaignItem;
+}
 
   openCampaign(): void{
     this.router.navigate(['/tabletop']);
@@ -59,7 +87,7 @@ export class CreateCampaignDialog {
     else if (this._isPrivateCampaign && this._campaignPassword === "")
       this._showPasswordError = true;
     else {
-      var newCampaign = new Campaign(this._campaignName, this._isPrivateCampaign, this._campaignPassword);
+      var newCampaign = new CreatedCampaign(this._campaignName, this._isPrivateCampaign, this._campaignPassword);
       this.dialogRef.close(newCampaign);
     }
   }
