@@ -42,8 +42,10 @@ export class LoginViewComponent implements OnInit {
         this._showEmailError = true;
       else if(!loginResult.IsPasswordCorrect)
         this._showPasswordError = true;
-      else
+      else{
+        localStorage.setItem("LoggedUserId", loginResult.Id.toString());
         this.router.navigate(['/main']);
+      }
     }
   }
 

@@ -23,6 +23,7 @@ namespace Dragon_WebApi.DataAccess
 
             var loginQuery = _connection.Query<User>($@"
                             SELECT
+                            Id,
                             UserEmail,
                             UserPassword
                             FROM Users
@@ -31,7 +32,10 @@ namespace Dragon_WebApi.DataAccess
             if (loginQuery == null)
                 loginResult.IsEmailCorrect = false;
             else
+            {
+                loginResult.Id = loginQuery.Id;
                 loginResult.IsPasswordCorrect = userPassword == loginQuery.UserPassword;
+            }
 
             return loginResult;
         }
