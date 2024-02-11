@@ -10,6 +10,14 @@
 <body>
   <app-header></app-header>
   <div class="main-wrapper">
+    <div *ngIf="_isLoading" class="spinner-overlay">
+      <div class="spinner-wrapper">
+        <div>
+          <mat-spinner></mat-spinner>
+          <p class="loading-text">Loading publications...</p>
+        </div>
+      </div>
+    </div>
     <div class="main-container">
       <div class="publication-wrapper" *ngFor="let publication of _publications">
         <div class="publication-container">
