@@ -84,6 +84,41 @@ export class CampaignsViewComponent implements OnInit {
     this._isLoading = false;
   }
 
+  editCampaign(campaignId: number): void {
+    const dialogRef = this.dialog.open(CampaignDataDialog, {
+      width: '20%',
+      height: '80%',
+      data: {
+        campaignId: campaignId,
+        isEdit: true
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      //If the user has created a campaign
+      if(result != undefined){
+        var campaign: Campaign = result.campaign;
+        var campaignUsers: Array<User> = result.campaignUsers;
+        this.updateCampaign(campaign, campaignUsers);
+      }
+    });
+  }
+
+  async updateCampaign(campaign: Campaign, campaignUsers: Array<User>): Promise<void> {
+    this._isLoading = true;
+    var campaignObservable = this.webApiService.updateCampaign(campaign._campaignId, campaign._campaignName);
+    await lastValueFrom(campaignObservable);
+    var campaignUsersObservable = this.webApiService.deleteUsersCampaign(campaign._campaignId);
+    await lastValueFrom(campaignUsersObservable);
+
+    for(let campaignUser of campaignUsers){
+      var campaignUserObservable = this.webApiService.addUserToCampaign(campaign._campaignId, campaignUser._userId);
+      await lastValueFrom(campaignUserObservable);
+    }
+    await this.loadCampaigns();
+    this._isLoading = false;
+  }
+
   deleteCampaign(campaignId: number): void {
     const dialogRef = this.dialog.open(ConfirmationDialog, {
       width: '20%',

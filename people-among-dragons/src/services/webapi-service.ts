@@ -14,6 +14,8 @@ export class WebApiService {
 
     constructor(private wepApiClient: HttpClient) {}
 
+    //User API methods
+
     isValidLoginData(userEmail: string, userPassword: string) {
         return this.wepApiClient.post(this.getWebApiUrl() + 'User/IsValidLogin?userEmail=' + userEmail + "&userPassword=" + userPassword , "", this._httpOptions).pipe(map(response => Object.assign(new LoginResult(), response)));
     }
@@ -23,20 +25,24 @@ export class WebApiService {
              "", this._httpOptions).pipe(map(response => response));
     }
 
-    getPublications() {
-        return this.wepApiClient.get(this.getWebApiUrl() + 'Publication/GetPublications', this._httpOptions).pipe(map(response => Object.assign(new Array<PublicationResponse>(), response)));
-    }
-
-    getUserCampaigns(userId: number) {
-        return this.wepApiClient.get(this.getWebApiUrl() + 'Campaign/GetUserCampaigns?userId=' + userId, this._httpOptions).pipe(map(response => Object.assign(new Array<CampaignResponse>(), response)));
-    }
-
     getUsers() {
         return this.wepApiClient.get(this.getWebApiUrl() + 'User/GetUsers', this._httpOptions).pipe(map(response => Object.assign(new Array<UserResponse>(), response)));
     }
 
     getUsersFromCampaign(campaignId: number) {
         return this.wepApiClient.get(this.getWebApiUrl() + 'User/GetUsersFromCampaign?campaignId=' + campaignId, this._httpOptions).pipe(map(response => Object.assign(new Array<UserResponse>(), response)));
+    }
+
+    //Publication API methods
+
+    getPublications() {
+        return this.wepApiClient.get(this.getWebApiUrl() + 'Publication/GetPublications', this._httpOptions).pipe(map(response => Object.assign(new Array<PublicationResponse>(), response)));
+    }
+
+    //Campaign API methods
+
+    getUserCampaigns(userId: number) {
+        return this.wepApiClient.get(this.getWebApiUrl() + 'Campaign/GetUserCampaigns?userId=' + userId, this._httpOptions).pipe(map(response => Object.assign(new Array<CampaignResponse>(), response)));
     }
 
     getCampaignData(campaignId: number) {
@@ -50,10 +56,20 @@ export class WebApiService {
     addUserToCampaign(campaignId: number, userId: number) {
         return this.wepApiClient.post(this.getWebApiUrl() + 'Campaign/AddUserToCampaign?campaignId=' + campaignId + "&userId=" + userId, this._httpOptions).pipe(map(response => response));
     }
+    
+    updateCampaign(campaignId: number, campaignName: string) {
+        return this.wepApiClient.put(this.getWebApiUrl() + 'Campaign/UpdateCampaign?campaignId=' + campaignId + "&campaignName=" + campaignName, this._httpOptions).pipe(map(response => response));
+    }
 
     deleteCampaign(campaignId: number) {
         return this.wepApiClient.delete(this.getWebApiUrl() + 'Campaign/DeleteCampaign?campaignId=' + campaignId, this._httpOptions).pipe(map(response => response));
     }
+
+    deleteUsersCampaign(campaignId: number) {
+        return this.wepApiClient.delete(this.getWebApiUrl() + 'Campaign/DeleteUsersCampaign?campaignId=' + campaignId, this._httpOptions).pipe(map(response => response));
+    }
+
+    //Common methods
 
     getWebApiUrl(): string {
         return "http://localhost:5159/api/";

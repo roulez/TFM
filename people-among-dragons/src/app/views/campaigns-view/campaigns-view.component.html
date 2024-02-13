@@ -31,7 +31,7 @@
             </div>
             <div class="campaign-container-footer">
                 <button class="campaign-buttons" (click)="openCampaign()">VIEW</button>
-                <button class="campaign-buttons">EDIT</button>
+                <button class="campaign-buttons" (click)="editCampaign(campaign._campaignId)">EDIT</button>
                 <button class="campaign-buttons">COPY</button>
                 <button class="campaign-important-buttons" (click)="deleteCampaign(campaign._campaignId)">DELETE</button>
             </div>

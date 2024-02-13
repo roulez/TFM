@@ -17,17 +17,17 @@ namespace Dragon_WebApi.DataAccess
             _connection = new SqlConnection(_connectionString);
         }
 
-        public List<Campaign> GetCampaignData(int campaignId)
+        public Campaign GetCampaignData(int campaignId)
         {
-            var userCampaignsQuery = _connection.Query<Campaign>($@"
+            var campaignDataQuery = _connection.Query<Campaign>($@"
                             SELECT 
                             Id,
                             CampaignName,
                             CampaignImage
                             FROM Campaigns
-                            WHERE Id='{campaignId}';").ToList();
+                            WHERE Id='{campaignId}';").FirstOrDefault();
 
-            return userCampaignsQuery;
+            return campaignDataQuery;
         }
 
         public int CreateCampaign(string campaignName, int userId)
@@ -60,6 +60,14 @@ namespace Dragon_WebApi.DataAccess
                             WHERE EXISTS (SELECT * FROM CampaignsUsers CU WHERE CU.CampaignId=C.Id AND CU.UserId='{userId}')").ToList();
 
             return userCampaignsQuery;
+        }
+
+        public void UpdateCampaign(int campaignId, string campaignName)
+        {
+            _connection.Query($@"
+                            UPDATE Campaigns
+                            SET CampaignName='{campaignName}'
+                            WHERE ID='{campaignId}';");
         }
 
         public void DeleteCampaignUsers(int campaignId)
