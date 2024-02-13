@@ -13,7 +13,6 @@ import { WebApiService } from 'src/services/webapi-service';
 })
 export class TabletopViewComponent implements OnInit {
   _numberOfRolls: number = 1;
-  _campaignName: string = "Test";
   _campaignId: number = -1;
   _sendPrivateMessage: boolean = false;
   _chatMessages: Array<TabletopMessages> = [];

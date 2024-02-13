@@ -5,13 +5,15 @@ import { MainViewComponent } from './views/main-view/main-view.component';
 import { RegisterViewComponent } from './views/register-view/register-view.component';
 import { CampaignsViewComponent } from './views/campaigns-view/campaigns-view.component';
 import { TabletopViewComponent } from './views/tabletop-view/tabletop-view.component';
+import { MessageViewComponent } from './views/message-view/message-view.component';
 
 const routes: Routes = [
   { path: '', component: LoginViewComponent },
   { path: 'main', component: MainViewComponent },
   { path: 'register', component: RegisterViewComponent },
   { path: 'campaigns', component: CampaignsViewComponent },
-  { path: 'tabletop/:id', component: TabletopViewComponent }
+  { path: 'tabletop/:id', component: TabletopViewComponent },
+  { path: 'messages', component: MessageViewComponent }
 ];
 
 @NgModule({

@@ -17,6 +17,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/main']);
   }
 
+  showMessages(): void{
+    this.router.navigate(['/messages']);
+  }
+
   showCampaigns(): void{
     this.router.navigate(['/campaigns']);
   }

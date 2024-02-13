@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>People among Dragons</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <app-header></app-header>
+  <div class="main-wrapper">
+    <div *ngIf="_isLoading" class="spinner-overlay">
+      <div class="spinner-wrapper">
+        <div>
+          <mat-spinner></mat-spinner>
+          <p class="loading-text">Loading messages...</p>
+        </div>
+      </div>
+    </div>
+    <div class="inbox-container">
+      <div class="inbox-buttons">
+        <button class="send-button">New message</button>
+        <mat-button-toggle-group [value]="_selectedInbox">
+          <mat-button-toggle value="inbox">Inbox</mat-button-toggle>
+          <mat-button-toggle value="sent">Sent items</mat-button-toggle>
+        </mat-button-toggle-group>
+        <button class="send-button">Refresh</button>
+      </div>
+      <div class="inbox-elements">
+        <div class="inbox-element">
+          <div>
+            <p class="inbox-user-text">User</p>
+            <p class="inbox-message-title">Title</p>
+            <p class="inbox-message-text">First words of text</p>
+          </div>
+          <div>
+            <p class="inbox-date-text">13/02/2024 16:18</p>
+          </div>    
+        </div>
+      </div>
+    </div>
+    <div class="main-container">
+    </div>
+  </div>
+  <app-footer></app-footer>
+</body>
+</html>

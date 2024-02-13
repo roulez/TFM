@@ -21,6 +21,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { CampaignDataDialog } from './views/campaigns-view/campaign-data/campaign-data.dialog';
 import { ConfirmationDialog } from './confirmation-dialog/confirmation-dialog';
+import { MessageViewComponent } from './views/message-view/message-view.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { ConfirmationDialog } from './confirmation-dialog/confirmation-dialog';
     CampaignsViewComponent,
     TabletopViewComponent,
     CampaignDataDialog,
-    ConfirmationDialog
+    ConfirmationDialog,
+    MessageViewComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,8 @@ import { ConfirmationDialog } from './confirmation-dialog/confirmation-dialog';
     MatButtonModule,
     HttpClientModule,
     MatProgressSpinnerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatButtonToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
