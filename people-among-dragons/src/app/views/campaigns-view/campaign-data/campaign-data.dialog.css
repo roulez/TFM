@@ -64,3 +64,26 @@
     cursor: pointer;
     width: 90%;
 }
+
+.delete-button {
+    border: 1px red solid;
+    border-radius: 6px;
+    padding: 5px;
+    background-color: white;
+    color: red;
+    cursor: pointer;
+    width: 15%;
+    margin-right: 15px;
+}
+
+.user-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid gray;
+    margin: 5px;
+}
+
+.user-text {
+    margin-left: 5px;
+}

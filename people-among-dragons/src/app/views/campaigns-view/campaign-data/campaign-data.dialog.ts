@@ -111,6 +111,12 @@ export class CampaignDataDialog implements OnInit {
     }
   }
 
+  deleteUser(userId: number): void {
+    var userIndex = this._campaignUsers.findIndex(user => user._userId === userId);
+    if(userIndex != -1)
+      this._campaignUsers.splice(userIndex, 1);
+  }
+
   closeDialog(): void{
     this.dialogRef.close();
   }

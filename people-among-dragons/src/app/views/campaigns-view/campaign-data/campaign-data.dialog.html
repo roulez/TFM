@@ -14,12 +14,13 @@
                     </mat-option>
                 </mat-select>
                 <span class="error-text" *ngIf="_showUserError">The selected user is already part of the campaign</span>
-                <span class="error-text" *ngIf="_showEmptyUserError">The selected user is already part of the campaign</span>
+                <span class="error-text" *ngIf="_showEmptyUserError">There needs to be at least one user per campaign</span>
             </div>
             <hr class="separator-line">
             <div class="text-container">
-                <div *ngFor="let campaignUser of _campaignUsers">
-                    <p>{{campaignUser._userName}} {{campaignUser._userSurname}} ({{campaignUser._userEmail}})</p>
+                <div class="user-list" *ngFor="let campaignUser of _campaignUsers">
+                    <p class="user-text">{{campaignUser._userName}} {{campaignUser._userSurname}} ({{campaignUser._userEmail}})</p>
+                    <button class="delete-button" (click)="deleteUser(campaignUser._userId)">Delete</button>
                 </div>               
             </div>
             <br>
