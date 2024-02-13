@@ -57,5 +57,33 @@ namespace Dragon_WebApi.DataAccess
                 return true;
             }
         }
+
+        public List<User> GetUsers()
+        {
+            var usersQuery = _connection.Query<User>($@"
+                            SELECT
+                            Id,
+                            UserEmail,
+                            UserName,
+                            UserSurname
+                            FROM Users;").ToList();
+
+            return usersQuery;
+        }
+
+        public List<User> GetUsersFromCampaign(int campaignId)
+        {
+            var usersQuery = _connection.Query<User>($@"
+                            SELECT
+                            U.Id,
+                            U.UserEmail,
+                            U.UserName,
+                            U.UserSurname
+                            FROM Users U
+                            INNER JOIN CampaignsUsers CU ON CU.UserId=U.Id
+                            WHERE CU.CampaignId='{campaignId}';").ToList();
+
+            return usersQuery;
+        }
     }
 }

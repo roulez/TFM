@@ -20,6 +20,14 @@ namespace Dragon_WebApi.Controllers
             _campaignDataAccess = new CampaignDataAccess(config);
         }
 
+        [Route("GetCampaignData")]
+        [HttpGet]
+        public string GetCampaignData(int campaignId)
+        {
+            var result = _campaignDataAccess.GetCampaignData(campaignId);
+            return JsonConvert.SerializeObject(result);
+        }
+
         [Route("GetUserCampaigns")]
         [HttpGet]
         public string GetUserCampaigns(int userId)

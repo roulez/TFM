@@ -19,6 +19,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+import { CampaignDataDialog } from './views/campaigns-view/campaign-data/campaign-data.dialog';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     RegisterViewComponent,
     CampaignsViewComponent,
     CreateCampaignDialog,
-    TabletopViewComponent
+    TabletopViewComponent,
+    CampaignDataDialog
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatTooltipModule,
     MatButtonModule,
     HttpClientModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,6 +4,7 @@ import { map } from 'rxjs';
 import { CampaignResponse } from 'src/models/campaign-response';
 import { LoginResult } from 'src/models/loginResult';
 import { PublicationResponse } from 'src/models/publication-response';
+import { UserResponse } from 'src/models/user-response';
 
 @Injectable({
     providedIn: 'root',
@@ -28,6 +29,18 @@ export class WebApiService {
 
     getUserCampaigns(userId: number) {
         return this.wepApiClient.get(this.getWebApiUrl() + 'Campaign/GetUserCampaigns?userId=' + userId, this._httpOptions).pipe(map(response => Object.assign(new Array<CampaignResponse>(), response)));
+    }
+
+    getUsers() {
+        return this.wepApiClient.get(this.getWebApiUrl() + 'User/GetUsers', this._httpOptions).pipe(map(response => Object.assign(new Array<UserResponse>(), response)));
+    }
+
+    getUsersFromCampaign(campaignId: number) {
+        return this.wepApiClient.get(this.getWebApiUrl() + 'User/GetUsersFromCampaign?campaignId=' + campaignId, this._httpOptions).pipe(map(response => Object.assign(new Array<UserResponse>(), response)));
+    }
+
+    getCampaignData(campaignId: number) {
+        return this.wepApiClient.get(this.getWebApiUrl() + 'Campaign/GetCampaignData?campaignId=' + campaignId, this._httpOptions).pipe(map(response => Object.assign(new CampaignResponse(), response)));
     }
 
     getWebApiUrl(): string {

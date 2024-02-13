@@ -17,6 +17,19 @@ namespace Dragon_WebApi.DataAccess
             _connection = new SqlConnection(_connectionString);
         }
 
+        public List<Campaign> GetCampaignData(int campaignId)
+        {
+            var userCampaignsQuery = _connection.Query<Campaign>($@"
+                            SELECT 
+                            Id,
+                            CampaignName,
+                            CampaignImage
+                            FROM Campaigns
+                            WHERE Id='{campaignId}';").ToList();
+
+            return userCampaignsQuery;
+        }
+
         public List<Campaign> GetUserCampaigns(int userId)
         {
             var userCampaignsQuery = _connection.Query<Campaign>($@"

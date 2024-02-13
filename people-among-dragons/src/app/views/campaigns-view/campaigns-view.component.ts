@@ -6,6 +6,7 @@ import { WebApiService } from 'src/services/webapi-service';
 import { lastValueFrom } from 'rxjs';
 import { CampaignResponse } from 'src/models/campaign-response';
 import { CreatedCampaign } from 'src/models/created-campaign';
+import { CampaignDataDialog } from './campaign-data/campaign-data.dialog';
 
 @Component({
   selector: 'app-campaigns-view',
@@ -36,21 +37,25 @@ export class CampaignsViewComponent implements OnInit {
   }
 
   mapResponseToCampaign(campaignResponse: CampaignResponse) : Campaign {
-    var campaignItem = new Campaign(0,"","",);
+    var campaignItem = new Campaign(0,"","");
     campaignItem._campaignId = campaignResponse.Id;
     campaignItem._campaignName = campaignResponse.CampaignName;
     campaignItem._campaignImage = campaignResponse.CampaignImage;
     return campaignItem;
-}
+  }
 
   openCampaign(): void{
     this.router.navigate(['/tabletop']);
   }
 
   createCampaign(): void{
-    const dialogRef = this.dialog.open(CreateCampaignDialog, {
+    const dialogRef = this.dialog.open(CampaignDataDialog, {
       width: '20%',
-      height: '80%'
+      height: '80%',
+      data: {
+        campaignId: -1,
+        isEdit: false
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
