@@ -51,5 +51,14 @@ namespace Dragon_WebApi.Controllers
             var result = _campaignDataAccess.GetUserCampaigns(userId);
             return JsonConvert.SerializeObject(result);
         }
+
+        [Route("DeleteCampaign")]
+        [HttpDelete]
+        public string DeleteCampaign(int campaignId)
+        {
+            _campaignDataAccess.DeleteCampaignUsers(campaignId);
+            _campaignDataAccess.DeleteCampaign(campaignId);
+            return JsonConvert.SerializeObject("true");
+        }
     }
 }

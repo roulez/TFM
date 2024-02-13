@@ -10,7 +10,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainViewComponent } from './views/main-view/main-view.component';
 import { RegisterViewComponent } from './views/register-view/register-view.component';
 import { CampaignsViewComponent } from './views/campaigns-view/campaigns-view.component';
-import { CreateCampaignDialog } from './views/campaigns-view/campaigns-view.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -21,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { CampaignDataDialog } from './views/campaigns-view/campaign-data/campaign-data.dialog';
+import { ConfirmationDialog } from './confirmation-dialog/confirmation-dialog';
 
 @NgModule({
   declarations: [
@@ -31,9 +31,9 @@ import { CampaignDataDialog } from './views/campaigns-view/campaign-data/campaig
     MainViewComponent,
     RegisterViewComponent,
     CampaignsViewComponent,
-    CreateCampaignDialog,
     TabletopViewComponent,
-    CampaignDataDialog
+    CampaignDataDialog,
+    ConfirmationDialog
   ],
   imports: [
     BrowserModule,

@@ -61,5 +61,15 @@ namespace Dragon_WebApi.DataAccess
 
             return userCampaignsQuery;
         }
+
+        public void DeleteCampaignUsers(int campaignId)
+        {
+            _connection.Query($@"DELETE FROM CampaignsUsers WHERE CampaignId='{campaignId}';");
+        }
+
+        public void DeleteCampaign(int campaignId)
+        {
+            _connection.Query($@"DELETE FROM Campaigns WHERE ID='{campaignId}';");
+        }
     }
 }

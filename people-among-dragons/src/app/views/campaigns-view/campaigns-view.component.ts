@@ -5,9 +5,9 @@ import { Campaign } from 'src/models/campaign';
 import { WebApiService } from 'src/services/webapi-service';
 import { lastValueFrom } from 'rxjs';
 import { CampaignResponse } from 'src/models/campaign-response';
-import { CreatedCampaign } from 'src/models/created-campaign';
 import { CampaignDataDialog } from './campaign-data/campaign-data.dialog';
 import { User } from 'src/models/user';
+import { ConfirmationDialog } from 'src/app/confirmation-dialog/confirmation-dialog';
 
 @Component({
   selector: 'app-campaigns-view',
@@ -84,40 +84,26 @@ export class CampaignsViewComponent implements OnInit {
     this._isLoading = false;
   }
 
-}
+  deleteCampaign(campaignId: number): void {
+    const dialogRef = this.dialog.open(ConfirmationDialog, {
+      width: '20%',
+      height: '20%',
+      data: {
+        confirmationText: "Are you sure you want to delete this campaign ? This action cannot be undone."
+      }
+    });
 
-@Component({
-  selector: 'create-campaign-dialog',
-  templateUrl: './create-campaign/create-campaign.dialog.html',
-  styleUrls: ['./create-campaign/create-campaign.dialog.css']
-})
-export class CreateCampaignDialog {
-  
-  _campaignName: string = "";
-  _showNameError: boolean = false;
-  _isPrivateCampaign: boolean = false;
-  _campaignPassword: string = "";
-  _showPasswordError: boolean = false;
-
-  constructor(
-    public dialogRef: MatDialogRef<CreateCampaignDialog>
-  ) {}
-
-  createCampaign(): void {
-    this._showNameError = false;
-    this._showPasswordError = false;
-    if(this._campaignName === "")
-      this._showNameError = true;
-    else if (this._isPrivateCampaign && this._campaignPassword === "")
-      this._showPasswordError = true;
-    else {
-      var newCampaign = new CreatedCampaign(this._campaignName, this._isPrivateCampaign, this._campaignPassword);
-      this.dialogRef.close(newCampaign);
-    }
+    dialogRef.afterClosed().subscribe(result => {
+      if(result === true)
+        this.asyncDeleteCampaign(campaignId);
+    });
   }
 
-  closeDialog(): void{
-    this.dialogRef.close();
+  async asyncDeleteCampaign(campaignId: number): Promise<void> {
+    this._isLoading = true;
+    var campaignObservable = this.webApiService.deleteCampaign(campaignId);
+    await lastValueFrom(campaignObservable);
+    this.loadCampaigns();
+    this._isLoading = false;
   }
-
 }

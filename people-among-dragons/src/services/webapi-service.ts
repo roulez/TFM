@@ -51,6 +51,10 @@ export class WebApiService {
         return this.wepApiClient.post(this.getWebApiUrl() + 'Campaign/AddUserToCampaign?campaignId=' + campaignId + "&userId=" + userId, this._httpOptions).pipe(map(response => response));
     }
 
+    deleteCampaign(campaignId: number) {
+        return this.wepApiClient.delete(this.getWebApiUrl() + 'Campaign/DeleteCampaign?campaignId=' + campaignId, this._httpOptions).pipe(map(response => response));
+    }
+
     getWebApiUrl(): string {
         return "http://localhost:5159/api/";
     }
