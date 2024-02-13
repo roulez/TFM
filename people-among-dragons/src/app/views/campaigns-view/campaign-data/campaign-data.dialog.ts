@@ -106,7 +106,7 @@ export class CampaignDataDialog implements OnInit {
     else if(this._campaignUsers.length == 0)
       this._showEmptyUserError = true;
     else{
-      var campaignData = {campaign: this._currentCampaign, campaignUsers: this._campaignUsers}      
+      var campaignData = {campaign: this._currentCampaign, campaignUsers: this._campaignUsers}
       this.dialogRef.close(campaignData);
     }
   }

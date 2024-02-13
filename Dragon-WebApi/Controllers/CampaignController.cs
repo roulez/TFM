@@ -28,6 +28,22 @@ namespace Dragon_WebApi.Controllers
             return JsonConvert.SerializeObject(result);
         }
 
+        [Route("CreateCampaign")]
+        [HttpPost]
+        public string CreateCampaign(string campaignName, int userId)
+        {
+            var result = _campaignDataAccess.CreateCampaign(campaignName, userId);
+            return JsonConvert.SerializeObject(result);
+        }
+
+        [Route("AddUserToCampaign")]
+        [HttpPost]
+        public string AddUserToCampaign(int campaignId, int userId)
+        {
+            var result = _campaignDataAccess.AddUserToCampaign(campaignId, userId);
+            return JsonConvert.SerializeObject(result);
+        }
+
         [Route("GetUserCampaigns")]
         [HttpGet]
         public string GetUserCampaigns(int userId)

@@ -7,6 +7,7 @@ import { lastValueFrom } from 'rxjs';
 import { CampaignResponse } from 'src/models/campaign-response';
 import { CreatedCampaign } from 'src/models/created-campaign';
 import { CampaignDataDialog } from './campaign-data/campaign-data.dialog';
+import { User } from 'src/models/user';
 
 @Component({
   selector: 'app-campaigns-view',
@@ -29,6 +30,7 @@ export class CampaignsViewComponent implements OnInit {
 
   async loadCampaigns(): Promise<void> {
     this._isLoading = true;
+    this._campaigns = [];
     var campaignsObservable = this.webApiService.getUserCampaigns(this._currentUserId);
     var campaignsResult = await lastValueFrom(campaignsObservable);
     for(let campaign of campaignsResult)
@@ -48,7 +50,7 @@ export class CampaignsViewComponent implements OnInit {
     this.router.navigate(['/tabletop']);
   }
 
-  createCampaign(): void{
+  createCampaign(): void {
     const dialogRef = this.dialog.open(CampaignDataDialog, {
       width: '20%',
       height: '80%',
@@ -60,9 +62,26 @@ export class CampaignsViewComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       //If the user has created a campaign
-      if(result != undefined)
-        console.log(result);
+      if(result != undefined){
+        var campaign: Campaign = result.campaign;
+        var campaignUsers: Array<User> = result.campaignUsers;
+        this.createNewCampaign(campaign, campaignUsers);
+      }
     });
+  }
+
+  async createNewCampaign(campaign: Campaign, campaignUsers: Array<User>): Promise<void> {
+    this._isLoading = true;
+
+    var campaignObservable = this.webApiService.createCampaign(campaign._campaignName, this._currentUserId);
+    var campaignId = await lastValueFrom(campaignObservable);
+
+    for(let campaignUser of campaignUsers){
+      var campaignUserObservable = this.webApiService.addUserToCampaign(campaignId, campaignUser._userId);
+      await lastValueFrom(campaignUserObservable);
+    }
+    await this.loadCampaigns();
+    this._isLoading = false;
   }
 
 }

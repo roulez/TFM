@@ -43,6 +43,14 @@ export class WebApiService {
         return this.wepApiClient.get(this.getWebApiUrl() + 'Campaign/GetCampaignData?campaignId=' + campaignId, this._httpOptions).pipe(map(response => Object.assign(new CampaignResponse(), response)));
     }
 
+    createCampaign(campaignName: string, userId: number) {
+        return this.wepApiClient.post(this.getWebApiUrl() + 'Campaign/CreateCampaign?campaignName=' + campaignName + "&userId=" + userId, this._httpOptions).pipe(map(response => parseInt(response.toString())));
+    }
+
+    addUserToCampaign(campaignId: number, userId: number) {
+        return this.wepApiClient.post(this.getWebApiUrl() + 'Campaign/AddUserToCampaign?campaignId=' + campaignId + "&userId=" + userId, this._httpOptions).pipe(map(response => response));
+    }
+
     getWebApiUrl(): string {
         return "http://localhost:5159/api/";
     }

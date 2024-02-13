@@ -30,6 +30,25 @@ namespace Dragon_WebApi.DataAccess
             return userCampaignsQuery;
         }
 
+        public int CreateCampaign(string campaignName, int userId)
+        {
+            var createCampaignId = _connection.QuerySingle<int>($@"
+                            INSERT INTO Campaigns (CampaignName, CampaignImage, UserId, CreationDate)
+                            OUTPUT INSERTED.Id 
+                            Values ('{campaignName}', '../../../assets/images/login-screen.jpg', '{userId}', CURRENT_TIMESTAMP);");
+
+            return createCampaignId;
+        }
+
+        public int AddUserToCampaign(int campaignId, int userId)
+        {
+            var createCampaignUserId = _connection.QuerySingle<int>($@"
+                        INSERT INTO CampaignsUsers (UserId, CampaignId)
+                        OUTPUT INSERTED.Id 
+                        Values ('{userId}', '{campaignId}');");
+            return createCampaignUserId;
+        }
+
         public List<Campaign> GetUserCampaigns(int userId)
         {
             var userCampaignsQuery = _connection.Query<Campaign>($@"
