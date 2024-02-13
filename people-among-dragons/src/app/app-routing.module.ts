@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'main', component: MainViewComponent },
   { path: 'register', component: RegisterViewComponent },
   { path: 'campaigns', component: CampaignsViewComponent },
-  { path: 'tabletop', component: TabletopViewComponent }
+  { path: 'tabletop/:id', component: TabletopViewComponent }
 ];
 
 @NgModule({

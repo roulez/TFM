@@ -46,8 +46,8 @@ export class CampaignsViewComponent implements OnInit {
     return campaignItem;
   }
 
-  openCampaign(): void{
-    this.router.navigate(['/tabletop']);
+  openCampaign(campaignId: number): void{
+    this.router.navigate(['/tabletop/' + campaignId]);
   }
 
   createCampaign(): void {
