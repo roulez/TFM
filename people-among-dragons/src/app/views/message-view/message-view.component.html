@@ -18,6 +18,7 @@
         </div>
       </div>
     </div>
+    <!--Screen with the inbox of messages-->
     <div class="inbox-container">
       <div class="inbox-buttons">
         <button class="send-button" (click)="redactNewMessage()">New message</button>
@@ -30,8 +31,9 @@
       <div class="inbox-elements">
         <div class="inbox-element" *ngFor="let inboxElement of _inboxElements" (click)="openMessage(inboxElement)">
           <div>
-            <p class="inbox-user-text">{{formatMessageInbox(inboxElement._sendingUserName, 5)}}</p>
-            <p class="inbox-message-title">{{formatMessageInbox(inboxElement._messageTitle, 20)}}</p>
+            <p *ngIf="_selectedInbox=='inbox'" class="inbox-user-text">{{formatMessageInbox(inboxElement._sendingUserName, 5)}}</p>
+            <p *ngIf="_selectedInbox=='sent'" class="inbox-user-text">{{formatMessageInbox(inboxElement._receivingUserName, 5)}}</p>
+            <p class="inbox-message-title">{{formatMessageInbox(inboxElement._messageTitle, 15)}}</p>
             <p class="inbox-message-text">{{formatMessageInbox(inboxElement._messageText, 30)}}</p>
           </div>
           <div>
@@ -40,12 +42,15 @@
         </div>
       </div>
     </div>
+    <!--Empty screen for when no message is selected-->
     <div *ngIf="!_isSendingMessage && _selectedMessageId==-1" class="main-container">
     </div>
+    <!--Screen for reading an already sent message-->
     <div *ngIf="!_isSendingMessage && _selectedMessageId!=-1" class="main-container">
       <div class="message-header">
         <h2 class="message-header-text">{{_selectedMessage._messageTitle}}</h2>
-        <button class="send-button" (click)="redactNewMessage(_selectedMessage._sendingUserId)">Reply</button>
+        <button *ngIf="_selectedInbox=='inbox'" class="send-button" (click)="redactNewMessage(_selectedMessage._sendingUserId, _selectedMessage._messageTitle)">Reply</button>
+        <button *ngIf="_selectedInbox=='sent'" class="send-button" (click)="redactNewMessage(_selectedMessage._receivingUserId, _selectedMessage._messageTitle)">Reply</button>
       </div>
       <div class="sending-data">
         <h3 class="message-header-text">From: {{_selectedMessage._sendingUserName}} {{_selectedMessage._sendingUserSurname}} ({{_selectedMessage._sendingUserEmail}})</h3>
@@ -57,6 +62,7 @@
         <p>{{_selectedMessage._messageText}}</p>
       </div>
     </div>
+    <!--Form for sending a new message-->
     <div *ngIf="_isSendingMessage" class="main-container">
       <div class="form-container">
         <div class="message-header-sending">
@@ -77,10 +83,10 @@
       </div>
       <hr class="separator-line">
       <div class="message-text">
-        <textarea class="sending-text" [value]="_sendingMessage._messageText"></textarea>
+        <textarea class="sending-text" [(ngModel)]="_sendingMessage._messageText"></textarea>
         <span class="error-text" *ngIf="_showMessageError">The message cannot be empty</span>
       </div>
-      <button class="send-button">Send</button>
+      <button class="send-button" (click)="sendMessage()">Send</button>
       <button class="secondary-button" (click)="cancelNewMessage()">Close</button>
     </div>
   </div>

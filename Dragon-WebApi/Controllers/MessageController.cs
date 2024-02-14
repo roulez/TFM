@@ -27,5 +27,13 @@ namespace Dragon_WebApi.Controllers
             var result = _messageDataAccess.GetUserMessages(userId);
             return JsonConvert.SerializeObject(result);
         }
+
+        [Route("CreateUserMessage")]
+        [HttpPost]
+        public string CreateUserMessage(string messageTitle, string messageText, int sendingUserId, int receivingUserId)
+        {
+            _messageDataAccess.CreateUserMessage(messageTitle, messageText, sendingUserId, receivingUserId);
+            return JsonConvert.SerializeObject("true");
+        }
     }
 }

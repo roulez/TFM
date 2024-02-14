@@ -42,7 +42,7 @@ CREATE TABLE CampaignsUsers (
 CREATE TABLE Messages (
     Id int NOT NULL IDENTITY(1,1),
     MessageTitle varchar(255) NOT NULL,
-    MessageText varchar(255) NOT NULL,
+    MessageText TEXT NOT NULL,
     SendingUserId int NOT NULL,
     ReceivingUserId int NOT NULL,
     CreationDate DATETIME NOT NULL,

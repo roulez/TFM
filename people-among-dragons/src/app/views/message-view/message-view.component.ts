@@ -110,13 +110,49 @@ export class MessageViewComponent implements OnInit {
     this._selectedMessage = selectedMessage;
   }
 
-  redactNewMessage(receivingUserId?: number):void {
+  redactNewMessage(receivingUserId?: number, messageTitle?: string):void {
     this._showTitleError = false;
     this._showReceivingError = false;
     this._showMessageError = false;
     this._receivingUserId = receivingUserId != undefined ? receivingUserId : -1;
-    this._sendingMessage = new Message(0, "", "", this._currentUserId, "", "", "", this._receivingUserId, "", "", "", new Date());
+    var newMessageTitle = messageTitle != undefined ? "RE: " + messageTitle : "";
+    this._sendingMessage = new Message(0, newMessageTitle, "", this._currentUserId, "", "", "", this._receivingUserId, "", "", "", new Date());
     this._isSendingMessage = true;
+  }
+
+  sendMessage(): void {
+    this._showTitleError = false;
+    this._showReceivingError = false;
+    this._showMessageError = false;
+    if(this._sendingMessage._messageTitle === "")
+      this._showTitleError = true;
+    else if(this._receivingUserId === -1)
+      this._showReceivingError = true;
+    else if(this._sendingMessage._messageText === "")
+      this._showMessageError = true;
+    else{
+      const dialogRef = this.dialog.open(ConfirmationDialog, {
+        width: '20%',
+        height: '20%',
+        data: {
+          confirmationText: "Are you sure you want to send this message ?"
+        }
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        if(result === true)
+          this.createNewMessage();
+      });
+    }
+  }
+
+  async createNewMessage(): Promise<void>{
+    this._isLoading = true;
+    this._isSendingMessage = false;
+    var messageObservable = this.webApiService.createUserMessage(this._sendingMessage._messageTitle, this._sendingMessage._messageText, this._sendingMessage._sendingUserId, this._receivingUserId);
+    await lastValueFrom(messageObservable);
+    await this.loadMessagesData();
+    this._isLoading = false;
   }
 
   cancelNewMessage(): void {

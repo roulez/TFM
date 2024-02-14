@@ -40,5 +40,12 @@ namespace Dragon_WebApi.DataAccess
 
             return userMessagesQuery;
         }
+
+        public void CreateUserMessage(string messageTitle, string messageText, int sendingUserId, int receivingUserId)
+        {
+            _connection.Query($@"
+                            INSERT INTO Messages (MessageTitle, MessageText, SendingUserId, ReceivingUserId, CreationDate)
+                            Values ('{messageTitle}', '{messageText}', '{sendingUserId}', {receivingUserId}, CURRENT_TIMESTAMP);");
+        }
     }
 }

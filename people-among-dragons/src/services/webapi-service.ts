@@ -76,6 +76,10 @@ export class WebApiService {
         return this.wepApiClient.get(this.getWebApiUrl() + 'Message/GetUserMessages?userId=' + userId, this._httpOptions).pipe(map(response => Object.assign(new Array<MessageResponse>(), response)));
     }
 
+    createUserMessage(messageTitle: string, messageText: string, sendingUserId: number, receivingUserId: number) {
+        return this.wepApiClient.post(this.getWebApiUrl() + 'Message/CreateUserMessage?messageTitle=' + messageTitle + "&messageText=" + messageText + "&sendingUserId=" + sendingUserId + "&receivingUserId=" + receivingUserId, this._httpOptions).pipe(map(response => Object.assign(new Array<MessageResponse>(), response)));
+    }
+
     //Common methods
 
     getWebApiUrl(): string {
