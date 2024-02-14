@@ -29,7 +29,7 @@
         <button class="send-button" (click)="loadMessagesData()">Refresh</button>
       </div>
       <div class="inbox-elements">
-        <div class="inbox-element" *ngFor="let inboxElement of _inboxElements" (click)="openMessage(inboxElement)">
+        <div [ngClass]="inboxElement._messageId === _selectedMessageId ? 'selected-inbox-element' : 'inbox-element'" *ngFor="let inboxElement of _inboxElements" (click)="openMessage(inboxElement)">
           <div>
             <p *ngIf="_selectedInbox=='inbox'" class="inbox-user-text">{{formatMessageInbox(inboxElement._sendingUserName, 5)}}</p>
             <p *ngIf="_selectedInbox=='sent'" class="inbox-user-text">{{formatMessageInbox(inboxElement._receivingUserName, 5)}}</p>

@@ -50,6 +50,20 @@
     margin-bottom: 5px;
 }
 
+.selected-inbox-element {
+    border: 1px black solid;
+    border-radius: 5px;
+    width: 95%;
+    height: 10%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(197 197 197);
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
 .inbox-user-text {
     font-size: 35px;
     margin-left: 10px;
