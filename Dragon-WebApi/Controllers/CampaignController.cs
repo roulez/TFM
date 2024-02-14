@@ -9,7 +9,7 @@ namespace Dragon_WebApi.Controllers
     [ApiController]
     [EnableCors("AllowedOrigins")]
     [Route("api/[controller]")]
-    public class CampaignController
+    public class CampaignController : ControllerBase
     {
         private readonly ILogger<Campaign> _logger;
         private readonly CampaignDataAccess _campaignDataAccess;

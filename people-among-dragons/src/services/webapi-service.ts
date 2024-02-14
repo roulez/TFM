@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { CampaignResponse } from 'src/models/campaign-response';
 import { LoginResult } from 'src/models/loginResult';
+import { MessageResponse } from 'src/models/message-response';
 import { PublicationResponse } from 'src/models/publication-response';
 import { UserResponse } from 'src/models/user-response';
 
@@ -67,6 +68,12 @@ export class WebApiService {
 
     deleteUsersCampaign(campaignId: number) {
         return this.wepApiClient.delete(this.getWebApiUrl() + 'Campaign/DeleteUsersCampaign?campaignId=' + campaignId, this._httpOptions).pipe(map(response => response));
+    }
+
+    //Messages API methods
+
+    getUserMessages(userId: number) {
+        return this.wepApiClient.get(this.getWebApiUrl() + 'Message/GetUserMessages?userId=' + userId, this._httpOptions).pipe(map(response => Object.assign(new Array<MessageResponse>(), response)));
     }
 
     //Common methods
