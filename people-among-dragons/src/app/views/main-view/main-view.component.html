@@ -20,13 +20,13 @@
     </div>
     <div class="main-container">
       <div class="publication-wrapper" *ngFor="let publication of _publications">
-        <div class="publication-container">
+        <div class="publication-container" (click)="openPublication(publication._publicationId)">
           <div class="publication-container-header">
             <img class="publication-image" [src]="publication._publicationImage" alt="PublicationImage">
             <h3>{{publication._publicationTitle}}</h3>
           </div>
           <div class="publication-content">
-            <h3>{{publication._publicationText}}</h3>
+            <h3>{{formatPublicationMessage(publication._publicationText, 650)}}</h3>
             <p class="footer-text">Created by: {{publication._userName}} - {{formatDateAsString(publication._publicationDate)}}</p>
           </div>
         </div>   

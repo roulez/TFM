@@ -23,6 +23,7 @@ import { CampaignDataDialog } from './views/campaigns-view/campaign-data/campaig
 import { ConfirmationDialog } from './confirmation-dialog/confirmation-dialog';
 import { MessageViewComponent } from './views/message-view/message-view.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { PublicationViewComponent } from './views/publication-view/publication-view.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     TabletopViewComponent,
     CampaignDataDialog,
     ConfirmationDialog,
-    MessageViewComponent
+    MessageViewComponent,
+    PublicationViewComponent
   ],
   imports: [
     BrowserModule,

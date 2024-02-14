@@ -26,7 +26,7 @@ namespace Dragon_WebApi.DataAccess
                             P.PublicationText,
                             P.PublicationImage,
                             U.UserName,
-                            P.CreationDate
+                            P.CreationDate AS PublicationDate
                             FROM Publications P
                             INNER JOIN Users U ON P.UserId=U.Id;").ToList();
 

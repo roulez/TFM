@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { Publication } from 'src/models/publication';
 import { PublicationResponse } from 'src/models/publication-response';
@@ -13,7 +14,7 @@ export class MainViewComponent implements OnInit {
   _publications: Array<Publication> = [];
   _isLoading: boolean = false;
 
-  constructor(private webApiService: WebApiService) { }
+  constructor(private router: Router, private webApiService: WebApiService) { }
 
   ngOnInit(): void {
     this.loadPublications();
@@ -29,14 +30,19 @@ export class MainViewComponent implements OnInit {
   }
 
   mapResponseToPublication(publicationResponse: PublicationResponse) : Publication {
-    var publicationItem = new Publication("","","","",new Date());
+    var publicationItem = new Publication(0,"","","","",new Date());
+    publicationItem._publicationId = publicationResponse.Id;
     publicationItem._publicationTitle = publicationResponse.PublicationTitle;
     publicationItem._publicationImage = publicationResponse.PublicationImage;
     publicationItem._publicationText = publicationResponse.PublicationText;
     publicationItem._userName = publicationResponse.UserName;
     publicationItem._publicationDate = new Date(publicationResponse.PublicationDate);
     return publicationItem;
-}
+  }
+
+  openPublication(publiationId:number): void {
+    this.router.navigate(['/publication/' + publiationId]);
+  }
 
   formatDateAsString(date: Date): string {
     return this.formatDateNumber(date.getDate()) + "/" + this.formatDateNumber(date.getMonth() + 1) + "/" + this.formatDateNumber(date.getFullYear()) + " " + this.formatDateNumber(date.getHours()) + ":" + this.formatDateNumber(date.getMinutes());
@@ -44,6 +50,13 @@ export class MainViewComponent implements OnInit {
 
   formatDateNumber(dateNumber: number): string {
     return dateNumber < 10 ? "0" + dateNumber.toString() : dateNumber.toString();
+  }
+
+  formatPublicationMessage(message: string, characterLimit: number): string {
+    if(message.length < characterLimit)
+      return message;
+    else
+      return message.substring(0, characterLimit) + "...";
   }
 
 }
