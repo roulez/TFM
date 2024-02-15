@@ -52,3 +52,96 @@
     text-align: right;
     margin-right: 10px;
 }
+
+.comments-wrapper {
+    border: 1px black solid;
+    text-align: center;
+    background-color: #f9c695;
+    padding: 10px;
+    border-radius: 5px;
+    height: 85%;
+}
+
+.comment-text-area-container {
+    border: 1px black solid;
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    height: 25%;
+    width: 70%;
+    margin: auto;
+}
+
+.comments-container {
+    border: 1px black solid;
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    overflow: auto;
+    height: 69%;
+    width: 70%;
+    margin: auto;
+}
+
+.comment-textarea {
+    width: 100%;
+    height: 65%;
+}
+
+.send-button {
+    border: 1px black solid;
+    border-radius: 6px;
+    padding: 5px;
+    background-color: rgb(9, 161, 216);
+    color: white;
+    cursor: pointer;
+    width: 5%;
+    margin-right: 5px;
+    float: right;
+}
+
+.comment-element {
+    border: 1px black solid;
+    border-radius: 5px;
+    height: 25%;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.comment-contents {
+    height: 55%;
+}
+
+.comment-text {
+    text-align: left;
+    overflow: auto;
+    margin-left: 10px;
+    height: 90%;
+    width: 99%;
+}
+
+.next-button {
+    border: 1px black solid;
+    border-radius: 6px;
+    padding: 5px;
+    background-color: rgb(9, 161, 216);
+    color: white;
+    cursor: pointer;
+    width: 8%;
+    margin-right: 5px;
+    float: right;
+}
+
+.previous-button {
+    border: 1px black solid;
+    border-radius: 6px;
+    padding: 5px;
+    background-color: rgb(9, 161, 216);
+    color: white;
+    cursor: pointer;
+    width: 8%;
+    margin-right: 5px;
+    float: left;
+}
