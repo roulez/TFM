@@ -42,20 +42,21 @@
         </div>
         <hr class="separator-line">
         <div class="comments-container">
-            <div class="comment-element">
-                <h2 class="publication-header-text">Test User</h2>
+            <div class="comment-element"  *ngFor="let comment of _shownComments">
+                <h2 class="publication-header-text">{{comment._userName}} ({{comment._userEmail}})</h2>
                 <hr class="separator-line">
                 <div class="comment-contents">
                     <div class="comment-text">
-                        <p>Test comment</p>
-                      </div>
-                      <div class="comment-footer">
-                        <p class="footer-text">Test comment Date</p>
+                        <p>{{comment._commentText}}</p>
                     </div>
+                    <p class="footer-text">{{formatDateAsString(comment._creationDate)}}</p>
                 </div>
             </div>
-            <button class="previous-button">Previous page</button>
-            <button class="next-button">Next page</button>
+            <div class="comment-footer">
+                <button class="comment-button" (click)="previousPage()">Previous page</button>
+                <p>Page {{_currentCommentPage + 1}}/{{_commentPages}}</p>
+                <button class="comment-button" (click)="nextPage()">Next page</button>
+            </div>
         </div>
     </div>
     <app-footer></app-footer>

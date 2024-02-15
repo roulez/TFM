@@ -4,6 +4,7 @@ import { map } from 'rxjs';
 import { CampaignResponse } from 'src/models/campaign-response';
 import { LoginResult } from 'src/models/loginResult';
 import { MessageResponse } from 'src/models/message-response';
+import { PublicationCommentResponse } from 'src/models/publication-comment-response';
 import { PublicationResponse } from 'src/models/publication-response';
 import { UserResponse } from 'src/models/user-response';
 
@@ -42,6 +43,12 @@ export class WebApiService {
 
     getPublicationData(publicationId: number) {
         return this.wepApiClient.get(this.getWebApiUrl() + 'Publication/GetPublicationData?publicationId=' + publicationId, this._httpOptions).pipe(map(response => Object.assign(new PublicationResponse(), response)));
+    }
+
+    //Publication Comments API methods
+
+    getPublicationComments(publicationId: number) {
+        return this.wepApiClient.get(this.getWebApiUrl() + 'PublicationComment/GetPublicationComments?publicationId=' + publicationId, this._httpOptions).pipe(map(response => Object.assign(new Array<PublicationCommentResponse>(), response)));
     }
 
     //Campaign API methods
