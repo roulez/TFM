@@ -37,8 +37,9 @@
         <div class="comment-text-area-container">
             <h2>Leave a comment</h2>
             <hr class="separator-line">
-            <textarea class="comment-textarea" maxlength="1000"></textarea>
-            <button class="send-button">Send</button>
+            <textarea class="comment-textarea" [(ngModel)]="_newComment._commentText" maxlength="1000"></textarea>
+            <span class="error-text" *ngIf="_showCommentTextError">The comment message cannot be empty</span>
+            <button class="send-button" (click)="sendComment()">Send</button>
         </div>
         <hr class="separator-line">
         <div class="comments-container">

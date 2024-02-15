@@ -27,5 +27,13 @@ namespace Dragon_WebApi.Controllers
             var result = _publicationCommentDataAccess.GetPublicationComments(publicationId);
             return JsonConvert.SerializeObject(result);
         }
+
+        [Route("CreatePublicationComment")]
+        [HttpPost]
+        public string CreatePublicationComment(string commentText, int publicationId, int userId)
+        {
+            _publicationCommentDataAccess.CreatePublicationComment(commentText, publicationId, userId);
+            return JsonConvert.SerializeObject("true");
+        }
     }
 }

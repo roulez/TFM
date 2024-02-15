@@ -33,5 +33,12 @@ namespace Dragon_WebApi.DataAccess
 
             return publicationCommentsQuery;
         }
+
+        public void CreatePublicationComment(string commentText, int publicationId, int userId)
+        {
+            _connection.Query<PublicationComment>($@"
+                             INSERT INTO PublicationComment (PublicationId, CommentText, UserId, CreationDate)
+                            Values ('{publicationId}', '{commentText}', '{userId}', CURRENT_TIMESTAMP);");
+        }
     }
 }

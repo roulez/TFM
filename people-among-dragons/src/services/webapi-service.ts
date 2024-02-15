@@ -51,6 +51,10 @@ export class WebApiService {
         return this.wepApiClient.get(this.getWebApiUrl() + 'PublicationComment/GetPublicationComments?publicationId=' + publicationId, this._httpOptions).pipe(map(response => Object.assign(new Array<PublicationCommentResponse>(), response)));
     }
 
+    createPublicationComment(commentText: string, publicationId: number, userId: number) {
+        return this.wepApiClient.post(this.getWebApiUrl() + 'PublicationComment/CreatePublicationComment?commentText=' + commentText + "&publicationId=" + publicationId + "&userId=" + userId, '', this._httpOptions).pipe(map(response => Object.assign(new Array<PublicationCommentResponse>(), response)));
+    }
+
     //Campaign API methods
 
     getUserCampaigns(userId: number) {
