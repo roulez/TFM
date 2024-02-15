@@ -30,7 +30,7 @@ export class MainViewComponent implements OnInit {
   }
 
   mapResponseToPublication(publicationResponse: PublicationResponse) : Publication {
-    var publicationItem = new Publication(0,"","","","",new Date());
+    var publicationItem = new Publication(0,"","","", "","",new Date());
     publicationItem._publicationId = publicationResponse.Id;
     publicationItem._publicationTitle = publicationResponse.PublicationTitle;
     publicationItem._publicationImage = publicationResponse.PublicationImage;

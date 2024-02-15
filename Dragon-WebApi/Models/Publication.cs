@@ -7,6 +7,7 @@
         public string PublicationImage { get; set; }
         public string PublicationText { get; set; }
         public string UserName { get; set; }
+        public string UserEmail { get; set; }
         public DateTime PublicationDate { get; set; }
 
         public Publication()
@@ -15,6 +16,7 @@
             PublicationImage = "";
             PublicationText = "";
             UserName = "";
+            UserEmail = "";
             PublicationDate = DateTime.Now;
         }
     }

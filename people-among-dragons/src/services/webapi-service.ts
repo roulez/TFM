@@ -40,6 +40,10 @@ export class WebApiService {
         return this.wepApiClient.get(this.getWebApiUrl() + 'Publication/GetPublications', this._httpOptions).pipe(map(response => Object.assign(new Array<PublicationResponse>(), response)));
     }
 
+    getPublicationData(publicationId: number) {
+        return this.wepApiClient.get(this.getWebApiUrl() + 'Publication/GetPublicationData?publicationId=' + publicationId, this._httpOptions).pipe(map(response => Object.assign(new PublicationResponse(), response)));
+    }
+
     //Campaign API methods
 
     getUserCampaigns(userId: number) {

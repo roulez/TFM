@@ -32,5 +32,23 @@ namespace Dragon_WebApi.DataAccess
 
             return publicationsQuery;
         }
+
+        public Publication getPublicationData(int publicationId)
+        {
+            var publicationQuery = _connection.Query<Publication>($@"
+                            SELECT
+                            P.Id,
+                            P.PublicationTitle,
+                            P.PublicationText,
+                            P.PublicationImage,
+                            U.UserName,
+                            U.UserEmail,
+                            P.CreationDate AS PublicationDate
+                            FROM Publications P
+                            INNER JOIN Users U ON P.UserId=U.Id
+                            WHERE P.Id ='{publicationId}';").FirstOrDefault();
+
+            return publicationQuery;
+        }
     }
 }

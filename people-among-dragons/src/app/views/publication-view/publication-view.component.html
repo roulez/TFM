@@ -9,11 +9,27 @@
 </head>
 <body>
     <app-header></app-header>
-    <div *ngIf="_isLoading" class="spinner-overlay">
-        <div class="spinner-wrapper">
-            <div>
-                <mat-spinner></mat-spinner>
-                <p class="loading-text">Loading publication data...</p>
+    <div class="main-wrapper">
+        <div *ngIf="_isLoading" class="spinner-overlay">
+            <div class="spinner-wrapper">
+                <div>
+                    <mat-spinner></mat-spinner>
+                    <p class="loading-text">Loading publication data...</p>
+                </div>
+            </div>
+        </div>
+        <div class="main-container">
+            <div class="publication-header">
+              <h2 class="publication-header-text">{{_publication._publicationTitle}}</h2>
+              <img class="publication-image" [src]="_publication._publicationImage" alt="PublicationImage">
+            </div>
+            <br>
+            <hr class="separator-line">
+            <div class="publication-text">
+              <p>{{_publication._publicationText}}</p>
+            </div>
+            <div class="publication-footer">
+                <p class="footer-text">Created by: {{_publication._userName}} ({{_publication._userEmail}}) - {{formatDateAsString(_publication._publicationDate)}}</p>
             </div>
         </div>
     </div>

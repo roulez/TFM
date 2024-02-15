@@ -4,6 +4,7 @@ export class PublicationResponse {
     PublicationImage: string;
     PublicationText: string;
     UserName: string;
+    UserEmail: string;
     PublicationDate: Date;
 
     constructor(){
@@ -12,6 +13,7 @@ export class PublicationResponse {
         this.PublicationImage = "";
         this.PublicationText = "";
         this.UserName = "";
+        this.UserEmail = "";
         this.PublicationDate = new Date();
     }
 }

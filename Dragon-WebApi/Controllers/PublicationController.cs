@@ -27,5 +27,13 @@ namespace Dragon_WebApi.Controllers
             var result = _publicationDataAccess.GetPublications();
             return JsonConvert.SerializeObject(result);
         }
+
+        [Route("GetPublicationData")]
+        [HttpGet]
+        public string GetPublicationData(int publicationId)
+        {
+            var result = _publicationDataAccess.getPublicationData(publicationId);
+            return JsonConvert.SerializeObject(result);
+        }
     }
 }
