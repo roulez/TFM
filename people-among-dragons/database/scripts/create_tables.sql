@@ -20,6 +20,17 @@ CREATE TABLE Publications (
     FOREIGN KEY (UserId) REFERENCES Users(Id)
 );
 
+CREATE TABLE PublicationComment (
+    Id int NOT NULL IDENTITY(1,1),
+    PublicationId int NOT NULL,
+    CommentText TEXT NOT NULL,
+    UserId int NOT NULL,
+    CreationDate DATETIME NOT NULL,
+    PRIMARY KEY (Id),
+    FOREIGN KEY (PublicationId) REFERENCES Publications(Id),
+    FOREIGN KEY (UserId) REFERENCES Users(Id)
+);
+
 CREATE TABLE Campaigns (
     Id int NOT NULL IDENTITY(1,1),
     CampaignName varchar(255) NOT NULL,
