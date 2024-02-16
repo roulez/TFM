@@ -1,0 +1,55 @@
+.main-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90%;
+    height: 90%;
+    background: url("../../../assets/images/login-screen.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    gap: 1%;
+}
+
+.main-container {
+    border: 1px black solid;
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    width: 70%;
+    height: 85%;
+}
+
+.publication-header {
+    display: flex;
+    width: 100%;
+    height: 10%;
+    margin-top: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.publication-header-text {
+    margin-left: 10px;
+}
+
+.publication-text {
+    text-align: left;
+    overflow: auto;
+    margin-left: 10px;
+    height: 80%;
+    width: 99%;
+}
+
+.send-button {
+    border: 1px black solid;
+    border-radius: 6px;
+    padding: 5px;
+    background-color: rgb(9, 161, 216);
+    color: white;
+    cursor: pointer;
+    width: 5%;
+    margin-right: 5px;
+    float: right;
+}

@@ -24,6 +24,7 @@ import { ConfirmationDialog } from './confirmation-dialog/confirmation-dialog';
 import { MessageViewComponent } from './views/message-view/message-view.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { PublicationViewComponent } from './views/publication-view/publication-view.component';
+import { NewPublicationViewComponent } from './views/new-publication-view/new-publication-view.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { PublicationViewComponent } from './views/publication-view/publication-v
     CampaignDataDialog,
     ConfirmationDialog,
     MessageViewComponent,
-    PublicationViewComponent
+    PublicationViewComponent,
+    NewPublicationViewComponent
   ],
   imports: [
     BrowserModule,

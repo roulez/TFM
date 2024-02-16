@@ -80,14 +80,14 @@
     padding: 10px;
     border-radius: 5px;
     overflow: auto;
-    height: 69%;
+    height: 67%;
     width: 70%;
     margin: auto;
 }
 
 .comment-textarea {
     width: 100%;
-    height: 65%;
+    height: 50%;
 }
 
 .send-button {
@@ -105,7 +105,7 @@
 .comment-element {
     border: 1px black solid;
     border-radius: 5px;
-    height: 25%;
+    height: 32%;
     text-align: left;
     margin-bottom: 5px;
 }

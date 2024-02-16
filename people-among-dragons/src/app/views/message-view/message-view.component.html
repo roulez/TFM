@@ -24,7 +24,7 @@
         <button class="send-button" (click)="redactNewMessage()">New message</button>
         <mat-button-toggle-group [value]="_selectedInbox" (change)="filterMessageData($event.value)">
           <mat-button-toggle value="inbox">Inbox</mat-button-toggle>
-          <mat-button-toggle value="sent">Sent items</mat-button-toggle>
+          <mat-button-toggle value="sent">Sent</mat-button-toggle>
         </mat-button-toggle-group>
         <button class="send-button" (click)="loadMessagesData()">Refresh</button>
       </div>
@@ -33,8 +33,8 @@
           <div>
             <p *ngIf="_selectedInbox=='inbox'" class="inbox-user-text">{{formatMessageInbox(inboxElement._sendingUserName, 5)}}</p>
             <p *ngIf="_selectedInbox=='sent'" class="inbox-user-text">{{formatMessageInbox(inboxElement._receivingUserName, 5)}}</p>
-            <p class="inbox-message-title">{{formatMessageInbox(inboxElement._messageTitle, 15)}}</p>
-            <p class="inbox-message-text">{{formatMessageInbox(inboxElement._messageText, 30)}}</p>
+            <p class="inbox-message-title">{{formatMessageInbox(inboxElement._messageTitle, 10)}}</p>
+            <p class="inbox-message-text">{{formatMessageInbox(inboxElement._messageText, 25)}}</p>
           </div>
           <div>
             <p class="inbox-date-text">{{formatDateAsString(inboxElement._creationDate)}}</p>
