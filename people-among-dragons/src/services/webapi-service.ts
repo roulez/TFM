@@ -73,8 +73,8 @@ export class WebApiService {
         return this.wepApiClient.post(this.getWebApiUrl() + 'Campaign/CreateCampaign?campaignName=' + campaignName + "&userId=" + userId, this._httpOptions).pipe(map(response => parseInt(response.toString())));
     }
 
-    addUserToCampaign(campaignId: number, userId: number) {
-        return this.wepApiClient.post(this.getWebApiUrl() + 'Campaign/AddUserToCampaign?campaignId=' + campaignId + "&userId=" + userId, this._httpOptions).pipe(map(response => response));
+    addUserToCampaign(campaignId: number, userId: number, userRole: number) {
+        return this.wepApiClient.post(this.getWebApiUrl() + 'Campaign/AddUserToCampaign?campaignId=' + campaignId + "&userId=" + userId + "&userRole=" + userRole, this._httpOptions).pipe(map(response => response));
     }
     
     updateCampaign(campaignId: number, campaignName: string) {

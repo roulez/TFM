@@ -16,9 +16,9 @@ INSERT INTO Campaigns (CampaignName, CampaignImage, UserId, CreationDate) Values
 INSERT INTO Campaigns (CampaignName, CampaignImage, UserId, CreationDate) Values ('Test Campaign 2', '../../../assets/images/login-screen.jpg', 2, CURRENT_TIMESTAMP);
 
 --Insert Sample User-Campaign relationships
-INSERT INTO CampaignsUsers (UserId, CampaignId) Values (1, 1);
-INSERT INTO CampaignsUsers (UserId, CampaignId) Values (2, 2);
-INSERT INTO CampaignsUsers (UserId, CampaignId) Values (1, 2);
+INSERT INTO CampaignsUsers (UserId, CampaignId, UserRole) Values (1, 1, 1);
+INSERT INTO CampaignsUsers (UserId, CampaignId, UserRole) Values (2, 2, 1);
+INSERT INTO CampaignsUsers (UserId, CampaignId, UserRole) Values (1, 2, 0);
 
 --Insert Sample Messages
 INSERT INTO Messages (MessageTitle, MessageText, SendingUserId, ReceivingUserId, CreationDate) Values ('First Message!', 'This is my first message', 2, 1, CURRENT_TIMESTAMP);

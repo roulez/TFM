@@ -45,6 +45,7 @@ CREATE TABLE CampaignsUsers (
     Id int NOT NULL IDENTITY(1,1),
     UserId int NOT NULL,
     CampaignId int NOT NULL,
+    UserRole int NOT NULL,
     PRIMARY KEY (Id),
     FOREIGN KEY (UserId) REFERENCES Users(Id),
     FOREIGN KEY (CampaignId) REFERENCES Campaigns(Id)

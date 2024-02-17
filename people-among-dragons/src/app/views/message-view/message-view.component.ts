@@ -68,7 +68,7 @@ export class MessageViewComponent implements OnInit {
   }
 
   mapResponseToUser(userResponse: UserResponse) : User {
-    var userItem = new User(0,"","", "");
+    var userItem = new User(0,"","", "", -1);
     userItem._userId = userResponse.Id;
     userItem._userEmail = userResponse.UserEmail;
     userItem._userName = userResponse.UserName;

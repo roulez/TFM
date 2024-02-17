@@ -40,12 +40,12 @@ namespace Dragon_WebApi.DataAccess
             return createCampaignId;
         }
 
-        public int AddUserToCampaign(int campaignId, int userId)
+        public int AddUserToCampaign(int campaignId, int userId, int userRole)
         {
             var createCampaignUserId = _connection.QuerySingle<int>($@"
-                        INSERT INTO CampaignsUsers (UserId, CampaignId)
+                        INSERT INTO CampaignsUsers (UserId, CampaignId, UserRole)
                         OUTPUT INSERTED.Id 
-                        Values ('{userId}', '{campaignId}');");
+                        Values ('{userId}', '{campaignId}', '{userRole}');");
             return createCampaignUserId;
         }
 

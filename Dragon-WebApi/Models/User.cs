@@ -7,6 +7,7 @@
         public string UserPassword { get; set; }
         public string UserName { get; set; }
         public string UserSurname { get; set; }
+        public int CampaignRole { get; set; }
 
         public User()
         {
@@ -15,6 +16,7 @@
             UserPassword = "";
             UserName = "";
             UserSurname = "";
+            CampaignRole = -1;
         }
     }
 }

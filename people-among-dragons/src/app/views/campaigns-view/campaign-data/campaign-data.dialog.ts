@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { lastValueFrom } from 'rxjs';
 import { Campaign } from 'src/models/campaign';
 import { CampaignResponse } from 'src/models/campaign-response';
+import { CampaignRole } from 'src/models/campaign-role';
 import { User } from 'src/models/user';
 import { UserResponse } from 'src/models/user-response';
 import { WebApiService } from 'src/services/webapi-service';
@@ -21,6 +22,7 @@ export class CampaignDataDialog implements OnInit {
   _showUserError: boolean = false;
   _showEmptyUserError: boolean = false;
   _currentCampaign: Campaign = new Campaign(0,"","");
+  _campaignRoles: Array<CampaignRole> = [new CampaignRole(0, "Player"), new CampaignRole(1, "Dungeon Master")];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public campaignData: {campaignId: number, isEdit: boolean},
@@ -68,8 +70,10 @@ export class CampaignDataDialog implements OnInit {
   async loadUsers(): Promise<void> {
     var usersObservable = this.webApiService.getUsers();
     var usersResult = await lastValueFrom(usersObservable);
-    for(let user of usersResult)
+    for(let user of usersResult) {
+      user.CampaignRole = 0;
       this._appUsers.push(this.mapResponseToUser(user));
+    }
   }
 
   async loadCampaignUsers(): Promise<void> {
@@ -80,11 +84,13 @@ export class CampaignDataDialog implements OnInit {
   }
 
   mapResponseToUser(userResponse: UserResponse) : User {
-    var userItem = new User(0,"","", "");
+    var userItem = new User(0,"","", "", -1);
     userItem._userId = userResponse.Id;
     userItem._userEmail = userResponse.UserEmail;
     userItem._userName = userResponse.UserName;
     userItem._userSurname = userResponse.UserSurname;
+    userItem._userSurname = userResponse.UserSurname;
+    userItem._campaignRole = userResponse.CampaignRole;
     return userItem;
   }
 

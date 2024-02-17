@@ -38,9 +38,9 @@ namespace Dragon_WebApi.Controllers
 
         [Route("AddUserToCampaign")]
         [HttpPost]
-        public string AddUserToCampaign(int campaignId, int userId)
+        public string AddUserToCampaign(int campaignId, int userId, int userRole)
         {
-            var result = _campaignDataAccess.AddUserToCampaign(campaignId, userId);
+            var result = _campaignDataAccess.AddUserToCampaign(campaignId, userId, userRole);
             return JsonConvert.SerializeObject(result);
         }
 

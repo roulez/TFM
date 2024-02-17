@@ -78,7 +78,8 @@ namespace Dragon_WebApi.DataAccess
                             U.Id,
                             U.UserEmail,
                             U.UserName,
-                            U.UserSurname
+                            U.UserSurname,
+                            CU.UserRole AS CampaignRole
                             FROM Users U
                             INNER JOIN CampaignsUsers CU ON CU.UserId=U.Id
                             WHERE CU.CampaignId='{campaignId}';").ToList();

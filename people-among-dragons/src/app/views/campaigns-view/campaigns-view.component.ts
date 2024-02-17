@@ -52,8 +52,8 @@ export class CampaignsViewComponent implements OnInit {
 
   createCampaign(): void {
     const dialogRef = this.dialog.open(CampaignDataDialog, {
-      width: '20%',
-      height: '80%',
+      width: '30%',
+      height: '90%',
       data: {
         campaignId: -1,
         isEdit: false
@@ -77,7 +77,7 @@ export class CampaignsViewComponent implements OnInit {
     var campaignId = await lastValueFrom(campaignObservable);
 
     for(let campaignUser of campaignUsers){
-      var campaignUserObservable = this.webApiService.addUserToCampaign(campaignId, campaignUser._userId);
+      var campaignUserObservable = this.webApiService.addUserToCampaign(campaignId, campaignUser._userId, campaignUser._campaignRole);
       await lastValueFrom(campaignUserObservable);
     }
     await this.loadCampaigns();
@@ -86,8 +86,8 @@ export class CampaignsViewComponent implements OnInit {
 
   editCampaign(campaignId: number): void {
     const dialogRef = this.dialog.open(CampaignDataDialog, {
-      width: '20%',
-      height: '80%',
+      width: '30%',
+      height: '90%',
       data: {
         campaignId: campaignId,
         isEdit: true
@@ -112,7 +112,7 @@ export class CampaignsViewComponent implements OnInit {
     await lastValueFrom(campaignUsersObservable);
 
     for(let campaignUser of campaignUsers){
-      var campaignUserObservable = this.webApiService.addUserToCampaign(campaign._campaignId, campaignUser._userId);
+      var campaignUserObservable = this.webApiService.addUserToCampaign(campaign._campaignId, campaignUser._userId, campaignUser._campaignRole);
       await lastValueFrom(campaignUserObservable);
     }
     await this.loadCampaigns();

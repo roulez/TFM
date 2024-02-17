@@ -20,12 +20,15 @@
             <div class="text-container">
                 <div class="user-list" *ngFor="let campaignUser of _campaignUsers">
                     <p class="user-text">{{campaignUser._userName}} {{campaignUser._userSurname}} ({{campaignUser._userEmail}})</p>
+                    <mat-select class="role-select" placeholder="Select user role..." [(value)]="campaignUser._campaignRole" #singleSelect>
+                        <mat-option *ngFor="let campaignRole of _campaignRoles" [value]="campaignRole._id">
+                            {{campaignRole._roleName}}
+                        </mat-option>
+                    </mat-select>
                     <button class="delete-button" (click)="deleteUser(campaignUser._userId)">Delete</button>
                 </div>               
             </div>
-            <br>
-            <br>
-            <div class="flex-container">
+            <div class="button-container">
                 <button *ngIf="!campaignData.isEdit" mat-button class="send-button" (click)="saveCampaign()">Create</button>
                 <button *ngIf="campaignData.isEdit" mat-button class="send-button" (click)="saveCampaign()">Update</button>
                 <button mat-button class="secondary-button" (click)="closeDialog()">Close</button>
