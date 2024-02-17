@@ -21,7 +21,7 @@
     <div class="main-container">
         <div class="text-container">
             <p class="private-message system-message">* Welcome to the tabletop for the campaign: {{_currentCampaign._campaignName}}</p>
-            <p *ngFor="let chatMessage of _chatMessages" [ngClass]="chatMessage._isPrivate ? 'private-message' : ''">*{{chatMessage._userName}} typed: {{chatMessage._message}}</p>
+            <p *ngFor="let chatMessage of _chatMessages" [ngClass]="(chatMessage._isPrivate ? 'private-message' : '') + ' ' + (checkIfUserCanCheckMessage(chatMessage) ? '' : 'hidden-message')">*{{chatMessage._userName}} typed: {{chatMessage._messageText}}</p>
         </div>
         <div>
             <div class="tabletop-footer">

@@ -51,5 +51,13 @@ namespace Dragon_WebApi.Controllers
             var result = _userDataAccess.GetUsersFromCampaign(campaignId);
             return JsonConvert.SerializeObject(result);
         }
+
+        [Route("GetUserCampaignData")]
+        [HttpGet]
+        public string GetUserCampaignData(int campaignId, int userId)
+        {
+            var result = _userDataAccess.GetUserCampaignData(campaignId, userId);
+            return JsonConvert.SerializeObject(result);
+        }
     }
 }

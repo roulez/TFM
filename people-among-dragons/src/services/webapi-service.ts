@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
+import { CampaignMessageResponse } from 'src/models/campaign-message-response';
 import { CampaignResponse } from 'src/models/campaign-response';
 import { LoginResult } from 'src/models/loginResult';
 import { MessageResponse } from 'src/models/message-response';
@@ -33,6 +34,10 @@ export class WebApiService {
 
     getUsersFromCampaign(campaignId: number) {
         return this.wepApiClient.get(this.getWebApiUrl() + 'User/GetUsersFromCampaign?campaignId=' + campaignId, this._httpOptions).pipe(map(response => Object.assign(new Array<UserResponse>(), response)));
+    }
+
+    getUserCampaignData(campaignId: number, userId: number) {
+        return this.wepApiClient.get(this.getWebApiUrl() + 'User/GetUserCampaignData?campaignId=' + campaignId + "&userId=" + userId, this._httpOptions).pipe(map(response => Object.assign(new UserResponse(), response)));
     }
 
     //Publication API methods
@@ -87,6 +92,16 @@ export class WebApiService {
 
     deleteUsersCampaign(campaignId: number) {
         return this.wepApiClient.delete(this.getWebApiUrl() + 'Campaign/DeleteUsersCampaign?campaignId=' + campaignId, this._httpOptions).pipe(map(response => response));
+    }
+
+    //Campaign Messages API methods
+
+    getCampaignMessages(campaignId: number) {
+        return this.wepApiClient.get(this.getWebApiUrl() + 'CampaignMessage/GetCampaignMessages?campaignId=' + campaignId, this._httpOptions).pipe(map(response => Object.assign(new Array<CampaignMessageResponse>(), response)));
+    }
+
+    createCampaignMessage(campaignId: number, userId: number, messageText: string, isPrivate: boolean) {
+        return this.wepApiClient.post(this.getWebApiUrl() + 'CampaignMessage/CreateCampaignMessage?campaignId=' + campaignId + "&userId=" + userId + "&messageText=" + messageText + "&isPrivate=" + isPrivate, '', this._httpOptions).pipe(map(response => Object.assign(new CampaignMessageResponse(), response)));
     }
 
     //Messages API methods

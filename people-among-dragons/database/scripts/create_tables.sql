@@ -51,6 +51,18 @@ CREATE TABLE CampaignsUsers (
     FOREIGN KEY (CampaignId) REFERENCES Campaigns(Id)
 );
 
+CREATE TABLE CampaignMessages (
+    Id int NOT NULL IDENTITY(1,1),
+    CampaignId int NOT NULL,
+    UserId int NOT NULL,
+    MessageText TEXT NOT NULL,
+    IsPrivate BIT NOT NULL,
+    CreationDate DATETIME NOT NULL,
+    PRIMARY KEY (Id),
+    FOREIGN KEY (UserId) REFERENCES Users(Id),
+    FOREIGN KEY (CampaignId) REFERENCES Campaigns(Id),
+);
+
 CREATE TABLE Messages (
     Id int NOT NULL IDENTITY(1,1),
     MessageTitle varchar(255) NOT NULL,

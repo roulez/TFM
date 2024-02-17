@@ -86,5 +86,21 @@ namespace Dragon_WebApi.DataAccess
 
             return usersQuery;
         }
+
+        public User GetUserCampaignData(int campaignId, int userId)
+        {
+            var userCampaignQuery = _connection.Query<User>($@"
+                            SELECT
+                            U.Id,
+                            U.UserEmail,
+                            U.UserName,
+                            U.UserSurname,
+                            CU.UserRole AS CampaignRole
+                            FROM Users U
+                            INNER JOIN CampaignsUsers CU ON CU.UserId=U.Id
+                            WHERE CU.CampaignId='{campaignId}' AND U.ID='{userId}';").FirstOrDefault();
+
+            return userCampaignQuery;
+        }
     }
 }

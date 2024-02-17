@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { Campaign } from 'src/models/campaign';
+import { CampaignMessage } from 'src/models/campaign-message';
+import { CampaignMessageResponse } from 'src/models/campaign-message-response';
 import { CampaignResponse } from 'src/models/campaign-response';
-import { TabletopMessages } from 'src/models/tabletop-messages';
+import { User } from 'src/models/user';
+import { UserResponse } from 'src/models/user-response';
 import { WebApiService } from 'src/services/webapi-service';
 
 @Component({
@@ -15,9 +18,11 @@ export class TabletopViewComponent implements OnInit {
   _numberOfRolls: number = 1;
   _campaignId: number = -1;
   _sendPrivateMessage: boolean = false;
-  _chatMessages: Array<TabletopMessages> = [];
+  _chatMessages: Array<CampaignMessage> = [];
   _userMessage: string = "";
   _currentCampaign: Campaign = new Campaign(0,"","");
+  _currentUserId: number = 0;
+  _currentUser: User = new User(0, "","","", -1);
   _isLoading: boolean = false;
 
   constructor(private route: ActivatedRoute, private webApiService: WebApiService) { }
@@ -25,13 +30,18 @@ export class TabletopViewComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this._campaignId = +params['id'];
-      this.loadData();
+      var loggedUserId = localStorage.getItem("LoggedUserId");
+      this._currentUserId = loggedUserId != undefined ? parseFloat(loggedUserId as string) : 0;
+      if(this._currentUserId != 0 && !isNaN(this._campaignId))
+        this.loadData();
    });
   }
 
   async loadData(): Promise<void>{
     this._isLoading = true;
     await this.loadCampaignData();
+    await this.loadUserCampaignData();
+    await this.loadCampaignMessages();
     this._isLoading = false;
   }
 
@@ -49,6 +59,43 @@ export class TabletopViewComponent implements OnInit {
     return campaignItem;
   }
 
+  async loadUserCampaignData(): Promise<void> {
+    var userCampaignObservable = this.webApiService.getUserCampaignData(this._campaignId, this._currentUserId);
+    var userCampaignResult = await lastValueFrom(userCampaignObservable);
+    this._currentUser = this.mapResponseToUser(userCampaignResult);
+  }
+
+  mapResponseToUser(userResponse: UserResponse) : User {
+    var userItem = new User(0,"","", "", -1);
+    userItem._userId = userResponse.Id;
+    userItem._userEmail = userResponse.UserEmail;
+    userItem._userName = userResponse.UserName;
+    userItem._userSurname = userResponse.UserSurname;
+    userItem._userSurname = userResponse.UserSurname;
+    userItem._campaignRole = userResponse.CampaignRole;
+    return userItem;
+  }
+
+  async loadCampaignMessages(): Promise<void> {
+    this._chatMessages = [];
+    var campaignMessagesObservable = this.webApiService.getCampaignMessages(this._campaignId);
+    var campaignMessagesResult = await lastValueFrom(campaignMessagesObservable);
+    for(let campaignMessage of campaignMessagesResult)
+      this._chatMessages.push(this.mapResponseToCampaignMessage(campaignMessage));
+  }
+
+  mapResponseToCampaignMessage(campaignMessageResponse: CampaignMessageResponse) : CampaignMessage {
+    var campaignMessageItem = new CampaignMessage(0, 0, 0, "", "", false, new Date());
+    campaignMessageItem._messageId = campaignMessageResponse.Id;
+    campaignMessageItem._campaignId = campaignMessageResponse.CampaignId;
+    campaignMessageItem._userId = campaignMessageResponse.UserId;
+    campaignMessageItem._userName = campaignMessageResponse.UserName;
+    campaignMessageItem._messageText = campaignMessageResponse.MessageText;
+    campaignMessageItem._isPrivate = campaignMessageResponse.IsPrivate;
+    campaignMessageItem._creationDate = new Date(campaignMessageResponse.CreationDate);
+    return campaignMessageItem;
+  }
+
   rollDice(diceSides: number): void {
     if(this._numberOfRolls > 0) {
       var rollResults = new Array<number>();
@@ -56,8 +103,8 @@ export class TabletopViewComponent implements OnInit {
         rollResults.push(this.generateRandomNumber(1, diceSides));
 
       var result = "You rolled a " + this.getRollResultsAsString(rollResults);
-      var resultMessage = new TabletopMessages(result,this._sendPrivateMessage, "TestUser");
-      this._chatMessages.push(resultMessage);
+      var resultMessage = new CampaignMessage(0, this._campaignId, this._currentUserId, "" , result, this._sendPrivateMessage, new Date());
+      this.createNewMessage(resultMessage);
     }   
   }
 
@@ -67,10 +114,18 @@ export class TabletopViewComponent implements OnInit {
 
   sendMessage(): void {
     if(this._userMessage !== "") {
-      var chatMessage = new TabletopMessages(this._userMessage, this._sendPrivateMessage, "TestUser");
+      var chatMessage = new CampaignMessage(0, this._campaignId, this._currentUserId, "" , this._userMessage, this._sendPrivateMessage, new Date());
       this._userMessage = "";
-      this._chatMessages.push(chatMessage);
+      this.createNewMessage(chatMessage);
     }     
+  }
+
+  async createNewMessage(newMessage: CampaignMessage): Promise<void> {
+    this._isLoading = true;
+    var campaignMessageObservable = this.webApiService.createCampaignMessage(newMessage._campaignId, newMessage._userId, newMessage._messageText, newMessage._isPrivate);
+    await lastValueFrom(campaignMessageObservable);
+    await this.loadCampaignMessages();
+    this._isLoading = false;
   }
 
   getRollResultsAsString(rollResults: Array<number>): string {
@@ -83,6 +138,15 @@ export class TabletopViewComponent implements OnInit {
       
     rollText += ")";
     return rollText;
+  }
+  
+  checkIfUserCanCheckMessage(chatMessage: CampaignMessage): boolean {
+    if(!chatMessage._isPrivate)
+      return true;
+    else if(chatMessage._userId == this._currentUser._userId || this._currentUser._campaignRole === 1)
+      return true;
+    else
+      return false;
   }
 
 }

@@ -20,6 +20,14 @@ INSERT INTO CampaignsUsers (UserId, CampaignId, UserRole) Values (1, 1, 1);
 INSERT INTO CampaignsUsers (UserId, CampaignId, UserRole) Values (2, 2, 1);
 INSERT INTO CampaignsUsers (UserId, CampaignId, UserRole) Values (1, 2, 0);
 
+--Insert Sample Campaign messages
+INSERT INTO CampaignMessages (CampaignId, UserId, MessageText, IsPrivate, CreationDate) Values (1, 1, 'This is a public message from the DM', 0, CURRENT_TIMESTAMP);
+INSERT INTO CampaignMessages (CampaignId, UserId, MessageText, IsPrivate, CreationDate) Values (1, 1, 'This is a private message from the DM', 1, CURRENT_TIMESTAMP);
+INSERT INTO CampaignMessages (CampaignId, UserId, MessageText, IsPrivate, CreationDate) Values (2, 2, 'This is a public message from the DM', 0, CURRENT_TIMESTAMP);
+INSERT INTO CampaignMessages (CampaignId, UserId, MessageText, IsPrivate, CreationDate) Values (2, 2, 'This is a private message from the DM', 1, CURRENT_TIMESTAMP);
+INSERT INTO CampaignMessages (CampaignId, UserId, MessageText, IsPrivate, CreationDate) Values (2, 1, 'This is a public message from the player', 0, CURRENT_TIMESTAMP);
+INSERT INTO CampaignMessages (CampaignId, UserId, MessageText, IsPrivate, CreationDate) Values (2, 1, 'This is a private message from the player', 1, CURRENT_TIMESTAMP);
+
 --Insert Sample Messages
 INSERT INTO Messages (MessageTitle, MessageText, SendingUserId, ReceivingUserId, CreationDate) Values ('First Message!', 'This is my first message', 2, 1, CURRENT_TIMESTAMP);
 INSERT INTO Messages (MessageTitle, MessageText, SendingUserId, ReceivingUserId, CreationDate) Values ('First Message!', 'This is my first message', 1, 2, CURRENT_TIMESTAMP);

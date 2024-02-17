@@ -63,3 +63,7 @@
     width: 80%;
     margin-left: 5px;
 }
+
+.hidden-message {
+    display: none;
+}
