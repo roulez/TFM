@@ -45,6 +45,10 @@ export class WebApiService {
         return this.wepApiClient.get(this.getWebApiUrl() + 'Publication/GetPublicationData?publicationId=' + publicationId, this._httpOptions).pipe(map(response => Object.assign(new PublicationResponse(), response)));
     }
 
+    createPublication(publicationTitle: string, publicationMessage: string, userId: number) {
+        return this.wepApiClient.post(this.getWebApiUrl() + 'Publication/CreatePublication?publicationTitle=' + publicationTitle + "&publicationMessage=" + publicationMessage + "&userId=" + userId, '', this._httpOptions).pipe(map(response => response));
+    }
+
     //Publication Comments API methods
 
     getPublicationComments(publicationId: number) {

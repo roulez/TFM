@@ -14,21 +14,24 @@
             <div class="spinner-wrapper">
                 <div>
                     <mat-spinner></mat-spinner>
-                    <p class="loading-text">Loading publication data...</p>
+                    <p class="loading-text">Creating publication...</p>
                 </div>
             </div>
         </div>
         <div class="main-container">
             <div class="publication-header">
-              <h2 class="publication-header-text">New publication</h2>
+                <label class="bolded-text form-label" for="ftitle">Publication title:<span class="main-text">*</span></label>
+                <input [(ngModel)]="_newPublication._publicationTitle" type="text" id="ftitle" name="ftitle" placeholder="Type the publication title..." required>
+                <span class="error-text" *ngIf="_showTitleError">The publication title must be filled</span>
             </div>
-            <br>
             <hr class="separator-line">
             <div class="publication-text">
-              <p>New publication text</p>
+                <label class="bolded-text form-label" for="fmessage">Publication message:<span class="main-text">*</span></label>
+                <textarea class="publication-textarea" [(ngModel)]="_newPublication._publicationText"></textarea>
+                <span class="error-text" *ngIf="_showMessageError">The publication text cannot be empty</span>
             </div>
             <div class="publication-footer">
-                <button class="send-button">Create</button>
+                <button class="send-button" (click)="createPublication()">Create</button>
             </div>
         </div>
     </div>

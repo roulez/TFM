@@ -19,6 +19,7 @@
       </div>
     </div>
     <div class="main-container">
+      <button class="send-button" (click)="createPublication()">New publication</button>
       <div class="publication-wrapper" *ngFor="let publication of _publications">
         <div class="publication-container" (click)="openPublication(publication._publicationId)">
           <div class="publication-container-header">

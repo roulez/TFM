@@ -28,12 +28,13 @@ namespace Dragon_WebApi.DataAccess
                             U.UserName,
                             P.CreationDate AS PublicationDate
                             FROM Publications P
-                            INNER JOIN Users U ON P.UserId=U.Id;").ToList();
+                            INNER JOIN Users U ON P.UserId=U.Id
+                            ORDER BY P.CreationDate DESC;").ToList();
 
             return publicationsQuery;
         }
 
-        public Publication getPublicationData(int publicationId)
+        public Publication GetPublicationData(int publicationId)
         {
             var publicationQuery = _connection.Query<Publication>($@"
                             SELECT
@@ -49,6 +50,13 @@ namespace Dragon_WebApi.DataAccess
                             WHERE P.Id ='{publicationId}';").FirstOrDefault();
 
             return publicationQuery;
+        }
+
+        public void CreatePublication(string publicationTitle, string publicationMessage, int userId)
+        {
+            _connection.Query($@"
+                            INSERT INTO Publications (PublicationTitle, PublicationText, PublicationImage, UserId, CreationDate)
+                            Values ('{publicationTitle}', '{publicationMessage}', '../../../assets/images/login-screen.jpg', '{userId}', CURRENT_TIMESTAMP);");
         }
     }
 }

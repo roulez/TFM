@@ -36,7 +36,8 @@ namespace Dragon_WebApi.DataAccess
                             FROM Messages M
                             INNER JOIN Users SU ON SU.Id=M.SendingUserId
                             INNER JOIN Users RU ON RU.Id=M.ReceivingUserId
-                            WHERE M.ReceivingUserId='{userId}' OR M.SendingUserId='{userId}';").ToList();
+                            WHERE M.ReceivingUserId='{userId}' OR M.SendingUserId='{userId}'
+                            ORDER BY M.CreationDate DESC;").ToList();
 
             return userMessagesQuery;
         }

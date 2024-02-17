@@ -181,3 +181,11 @@
     cursor: pointer;
     width: 25%;
 }
+
+.bolded-text {
+    font-weight: bold; 
+}
+
+.main-text {
+    color: red; 
+}

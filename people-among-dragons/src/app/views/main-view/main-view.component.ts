@@ -59,4 +59,8 @@ export class MainViewComponent implements OnInit {
       return message.substring(0, characterLimit) + "...";
   }
 
+  createPublication(): void {
+    this.router.navigate(['/createpublication']);
+  }
+
 }

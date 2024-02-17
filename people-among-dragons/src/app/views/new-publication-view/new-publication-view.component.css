@@ -26,16 +26,12 @@
     width: 100%;
     height: 10%;
     margin-top: 10px;
-    justify-content: space-between;
     align-items: center;
-}
-
-.publication-header-text {
-    margin-left: 10px;
+    gap: 10px;
 }
 
 .publication-text {
-    text-align: left;
+    text-align: center;
     overflow: auto;
     margin-left: 10px;
     height: 80%;
@@ -52,4 +48,25 @@
     width: 5%;
     margin-right: 5px;
     float: right;
+}
+
+.form-label {
+    padding: 5px; 
+}
+
+.bolded-text {
+    font-weight: bold; 
+}
+
+.main-text {
+    color: red; 
+}
+
+.error-text {
+    color: red;
+} 
+
+.publication-textarea {
+    height: 90%;
+    width: 99%;
 }
