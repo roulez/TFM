@@ -28,6 +28,7 @@ export class MessageViewComponent implements OnInit {
   _showTitleError: boolean = false;
   _showReceivingError: boolean = false;
   _showMessageError: boolean = false;
+  _showNotAllowedScreen: boolean = false;
 
   constructor(public dialog: MatDialog, private webApiService: WebApiService) { }
 
@@ -36,6 +37,8 @@ export class MessageViewComponent implements OnInit {
     this._currentUserId = loggedUserId != undefined ? parseFloat(loggedUserId as string) : 0;
     if(this._currentUserId != 0)
       this.loadData();
+    else
+      this._showNotAllowedScreen = true;
   }
 
   async loadData(): Promise<void> {

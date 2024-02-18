@@ -13,11 +13,18 @@ import { WebApiService } from 'src/services/webapi-service';
 export class MainViewComponent implements OnInit {
   _publications: Array<Publication> = [];
   _isLoading: boolean = false;
+  _currentUserId: number = 0;
+  _showNotAllowedScreen: boolean = false;
 
   constructor(private router: Router, private webApiService: WebApiService) { }
 
   ngOnInit(): void {
-    this.loadPublications();
+    var loggedUserId = localStorage.getItem("LoggedUserId");
+    this._currentUserId = loggedUserId != undefined ? parseFloat(loggedUserId as string) : 0;
+    if(this._currentUserId != 0)
+      this.loadPublications();
+    else
+      this._showNotAllowedScreen = true;
   }
 
   async loadPublications(): Promise<void> {

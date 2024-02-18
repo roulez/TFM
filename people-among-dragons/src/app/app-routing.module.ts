@@ -8,6 +8,7 @@ import { TabletopViewComponent } from './views/tabletop-view/tabletop-view.compo
 import { MessageViewComponent } from './views/message-view/message-view.component';
 import { PublicationViewComponent } from './views/publication-view/publication-view.component';
 import { NewPublicationViewComponent } from './views/new-publication-view/new-publication-view.component';
+import { NotFoundViewComponent } from './views/not-found-view/not-found-view.component';
 
 const routes: Routes = [
   { path: '', component: LoginViewComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'tabletop/:id', component: TabletopViewComponent },
   { path: 'messages', component: MessageViewComponent },
   { path: 'publication/:id', component: PublicationViewComponent },
-  { path: 'createpublication', component: NewPublicationViewComponent }
+  { path: 'createpublication', component: NewPublicationViewComponent },
+  { path: '**', component: NotFoundViewComponent }
 ];
 
 @NgModule({

@@ -1,0 +1,30 @@
+.main-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90%;
+    height: 90%;
+    background: url("../../../assets/images/login-screen.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    gap: 1%;
+}
+
+.main-container {
+    border: 1px black solid;
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    width: 70%;
+    height: 85%;
+}
+
+.error-image{
+    width: 150px;
+}
+
+.error-text {
+    text-align: center;
+}

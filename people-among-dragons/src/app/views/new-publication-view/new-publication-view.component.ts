@@ -17,12 +17,15 @@ export class NewPublicationViewComponent implements OnInit {
   _newPublication: Publication = new Publication(0, "", "", "", "", "", new Date());
   _showTitleError: boolean = false;
   _showMessageError: boolean = false;
+  _showNotAllowedScreen: boolean = false;
   
   constructor(private router: Router, public dialog: MatDialog, private webApiService: WebApiService) { }
 
   ngOnInit(): void {
     var loggedUserId = localStorage.getItem("LoggedUserId");
     this._currentUserId = loggedUserId != undefined ? parseFloat(loggedUserId as string) : 0;
+    if(this._currentUserId === 0)
+      this._showNotAllowedScreen = true;
   }
 
   createPublication(): void {

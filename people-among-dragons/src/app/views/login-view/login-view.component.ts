@@ -10,7 +10,6 @@ import { WebApiService } from 'src/services/webapi-service';
   styleUrls: ['./login-view.component.css']
 })
 export class LoginViewComponent implements OnInit {
-
   _userEmail: string = "";
   _userPassword: string = "";
   _showEmailError: boolean = false;
@@ -19,10 +18,16 @@ export class LoginViewComponent implements OnInit {
   _emailControl: FormControl = new FormControl('',[Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]);
   _passwordControl: FormControl = new FormControl();
   _loginForms = new FormGroup({ _emailControl: this._emailControl });
+  _currentUserId: number = 0;
 
   constructor(private router: Router, private webApiService: WebApiService) { }
 
   ngOnInit(): void {
+    var loggedUserId = localStorage.getItem("LoggedUserId");
+    this._currentUserId = loggedUserId != undefined ? parseFloat(loggedUserId as string) : 0;
+    //If there is already a logged user, login directly
+    if(this._currentUserId != 0)
+      this.router.navigate(['/main']);
   }
 
   async checkLoginData(): Promise<void>{

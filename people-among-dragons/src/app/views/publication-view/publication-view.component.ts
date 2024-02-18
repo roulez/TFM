@@ -25,6 +25,7 @@ export class PublicationViewComponent implements OnInit {
   _currentCommentPage: number = 0;
   _commentPages: number = 0;
   _showCommentTextError: boolean = false;
+  _showNotAllowedScreen: boolean = false;
 
   constructor(private route: ActivatedRoute, public dialog: MatDialog, private webApiService: WebApiService) { }
 
@@ -35,6 +36,8 @@ export class PublicationViewComponent implements OnInit {
       this._currentUserId = loggedUserId != undefined ? parseFloat(loggedUserId as string) : 0;
       if(this._currentUserId != 0 && !isNaN(this._publicationId))
         this.loadData();
+      else
+        this._showNotAllowedScreen = true;
    });
   }
 

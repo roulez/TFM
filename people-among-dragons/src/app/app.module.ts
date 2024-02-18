@@ -25,6 +25,8 @@ import { MessageViewComponent } from './views/message-view/message-view.componen
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { PublicationViewComponent } from './views/publication-view/publication-view.component';
 import { NewPublicationViewComponent } from './views/new-publication-view/new-publication-view.component';
+import { NotFoundViewComponent } from './views/not-found-view/not-found-view.component';
+import { NotAllowedViewComponent } from './views/not-allowed-view/not-allowed-view.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { NewPublicationViewComponent } from './views/new-publication-view/new-pu
     ConfirmationDialog,
     MessageViewComponent,
     PublicationViewComponent,
-    NewPublicationViewComponent
+    NewPublicationViewComponent,
+    NotFoundViewComponent,
+    NotAllowedViewComponent
   ],
   imports: [
     BrowserModule,

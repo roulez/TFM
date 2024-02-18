@@ -18,6 +18,7 @@ export class CampaignsViewComponent implements OnInit {
   _currentUserId: number = 0;
   _campaigns: Array<Campaign> = [];
   _isLoading: boolean = false;
+  _showNotAllowedScreen: boolean = false;
 
   constructor(private router: Router, public dialog: MatDialog, private webApiService: WebApiService) { }
 
@@ -26,6 +27,8 @@ export class CampaignsViewComponent implements OnInit {
     this._currentUserId = loggedUserId != undefined ? parseFloat(loggedUserId as string) : 0;
     if(this._currentUserId != 0)
       this.loadCampaigns();
+    else
+      this._showNotAllowedScreen = true;
   }
 
   async loadCampaigns(): Promise<void> {

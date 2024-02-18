@@ -9,7 +9,7 @@
 </head>
 <body>
   <app-header></app-header>
-  <div class="main-wrapper">
+  <div *ngIf="!_showNotAllowedScreen"  class="main-wrapper">
     <div *ngIf="_isLoading" class="spinner-overlay">
       <div class="spinner-wrapper">
         <div>
@@ -89,6 +89,9 @@
       <button class="send-button" (click)="sendMessage()">Send</button>
       <button class="secondary-button" (click)="cancelNewMessage()">Close</button>
     </div>
+  </div>
+  <div *ngIf="_showNotAllowedScreen" class="main-wrapper">
+    <app-not-allowed-view></app-not-allowed-view>
   </div>
   <app-footer></app-footer>
 </body>

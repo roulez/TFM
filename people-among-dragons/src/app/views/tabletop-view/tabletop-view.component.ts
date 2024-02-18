@@ -24,6 +24,7 @@ export class TabletopViewComponent implements OnInit {
   _currentUserId: number = 0;
   _currentUser: User = new User(0, "","","", -1);
   _isLoading: boolean = false;
+  _showNotAllowedScreen: boolean = false;
 
   constructor(private route: ActivatedRoute, private webApiService: WebApiService) { }
 
@@ -34,14 +35,22 @@ export class TabletopViewComponent implements OnInit {
       this._currentUserId = loggedUserId != undefined ? parseFloat(loggedUserId as string) : 0;
       if(this._currentUserId != 0 && !isNaN(this._campaignId))
         this.loadData();
+      else
+        this._showNotAllowedScreen = true;
    });
   }
 
   async loadData(): Promise<void>{
     this._isLoading = true;
-    await this.loadCampaignData();
-    await this.loadUserCampaignData();
-    await this.loadCampaignMessages();
+    var partOfTheCampaignObservable = this.webApiService.isUserPartOfTheCampaign(this._campaignId, this._currentUserId);
+    var partOfTheCampaignResult = await lastValueFrom(partOfTheCampaignObservable);
+    if(partOfTheCampaignResult){
+      await this.loadCampaignData();
+      await this.loadUserCampaignData();
+      await this.loadCampaignMessages();
+    }
+    else
+      this._showNotAllowedScreen = true;
     this._isLoading = false;
   }
 

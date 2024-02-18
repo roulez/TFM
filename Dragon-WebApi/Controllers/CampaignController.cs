@@ -52,6 +52,14 @@ namespace Dragon_WebApi.Controllers
             return JsonConvert.SerializeObject(result);
         }
 
+        [Route("IsUserPartOfTheCampaign")]
+        [HttpGet]
+        public string IsUserPartOfTheCampaign(int campaignId, int userId)
+        {
+            var result = _campaignDataAccess.IsUserPartOfTheCampaign(campaignId, userId);
+            return JsonConvert.SerializeObject(result);
+        }
+
         [Route("UpdateCampaign")]
         [HttpPut]
         public string UpdateCampaign(int campaignId, string campaignName)

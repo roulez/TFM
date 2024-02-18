@@ -62,6 +62,17 @@ namespace Dragon_WebApi.DataAccess
             return userCampaignsQuery;
         }
 
+        public bool IsUserPartOfTheCampaign(int campaignId, int userId)
+        {
+            var isUserFromCampaignQuery = _connection.Query<Campaign>($@"
+                            SELECT 
+                            Id
+                            FROM CampaignsUsers
+                            WHERE UserId='{userId}' AND CampaignId='{campaignId}';").FirstOrDefault();
+
+            return isUserFromCampaignQuery != null;
+        }
+
         public void UpdateCampaign(int campaignId, string campaignName)
         {
             _connection.Query($@"
