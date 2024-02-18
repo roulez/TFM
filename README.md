@@ -1,4 +1,4 @@
-# People Among Drafons
+# People Among Dragons
 This project was made for my Master's degree final project, consisting on a social network on where people can discuss topics related with Dungeons and Dragons and find other people to play together.
 The project uses the following technologies:
   -Angular: For the  front-end development
