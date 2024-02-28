@@ -19,7 +19,8 @@ namespace Dragon_WebApi.DataAccess
 
         public List<PublicationComment> GetPublicationComments(int publicationId)
         {
-            var publicationCommentsQuery = _connection.Query<PublicationComment>($@"
+            var sqlParameters = new { PublicationId = publicationId };
+            var publicationCommentsQuery = $@"
                             SELECT
                             PC.Id,
                             PC.CommentText,
@@ -28,17 +29,22 @@ namespace Dragon_WebApi.DataAccess
                             PC.CreationDate
                             FROM PublicationComment PC
                             INNER JOIN Users U ON U.Id=PC.UserId
-                            WHERE PC.PublicationId='{publicationId}'
-                            ORDER BY PC.CreationDate DESC;").ToList();
+                            WHERE PC.PublicationId=@PublicationId
+                            ORDER BY PC.CreationDate DESC;";
 
-            return publicationCommentsQuery;
+            var publicationComments = _connection.Query<PublicationComment>(publicationCommentsQuery, sqlParameters).ToList();
+
+            return publicationComments;
         }
 
         public void CreatePublicationComment(string commentText, int publicationId, int userId)
         {
-            _connection.Query<PublicationComment>($@"
+            var sqlParameters = new { PublicationId = publicationId, CommentText = commentText, UserId = userId, CreationDate = DateTime.Now.ToString() };
+            var createPublicationCommentQuery = $@"
                              INSERT INTO PublicationComment (PublicationId, CommentText, UserId, CreationDate)
-                            Values ('{publicationId}', '{commentText}', '{userId}', CURRENT_TIMESTAMP);");
+                            Values (@PublicationId, @CommentText, @UserId, @CreationDate);";
+
+            _connection.Query<PublicationComment>(createPublicationCommentQuery, sqlParameters);
         }
     }
 }

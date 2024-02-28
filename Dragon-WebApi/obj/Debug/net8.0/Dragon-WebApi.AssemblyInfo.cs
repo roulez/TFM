@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Dragon-WebApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+249f0d7bb782986de28d9dd97007ad3bf60de9b9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+61fe83d5905b5fc213149a357884376701cba1da")]
 [assembly: System.Reflection.AssemblyProductAttribute("Dragon-WebApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Dragon-WebApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
