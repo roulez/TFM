@@ -19,7 +19,7 @@ namespace Dragon_WebApi.DataAccess
 
         public List<Publication> GetPublications()
         {
-            var publicationsQuery = _connection.Query<Publication>($@"
+            var publicationsQuery = $@"
                             SELECT
                             P.Id,
                             P.PublicationTitle,
@@ -29,14 +29,18 @@ namespace Dragon_WebApi.DataAccess
                             P.CreationDate AS PublicationDate
                             FROM Publications P
                             INNER JOIN Users U ON P.UserId=U.Id
-                            ORDER BY P.CreationDate DESC;").ToList();
+                            ORDER BY P.CreationDate DESC;";
 
-            return publicationsQuery;
+            var publications = _connection.Query<Publication>(publicationsQuery).ToList();
+
+            return publications;
         }
 
         public Publication GetPublicationData(int publicationId)
         {
-            var publicationQuery = _connection.Query<Publication>($@"
+            var sqlParameters = new { PublicationId = publicationId };
+
+            var publicationDataQuery = $@"
                             SELECT
                             P.Id,
                             P.PublicationTitle,
@@ -47,16 +51,21 @@ namespace Dragon_WebApi.DataAccess
                             P.CreationDate AS PublicationDate
                             FROM Publications P
                             INNER JOIN Users U ON P.UserId=U.Id
-                            WHERE P.Id ='{publicationId}';").FirstOrDefault();
+                            WHERE P.Id=@PublicationId;";
 
-            return publicationQuery;
+            var publicationData = _connection.Query<Publication>(publicationDataQuery, sqlParameters).FirstOrDefault();
+
+            return publicationData;
         }
 
         public void CreatePublication(string publicationTitle, string publicationMessage, int userId)
         {
-            _connection.Query($@"
+            var sqlParameters = new { PublicationTitle = publicationTitle, PublicationText = publicationMessage, PublicationImage = "../../../assets/images/login-screen.jpg", UserId = userId, CreationDate = DateTime.Now.ToString() };
+            var createPublicationQuery = $@"
                             INSERT INTO Publications (PublicationTitle, PublicationText, PublicationImage, UserId, CreationDate)
-                            Values ('{publicationTitle}', '{publicationMessage}', '../../../assets/images/login-screen.jpg', '{userId}', CURRENT_TIMESTAMP);");
+                            Values (@PublicationTitle, @PublicationText, @PublicationImage, @UserId, @CreationDate);";
+
+            _connection.Query(createPublicationQuery, sqlParameters);
         }
     }
 }
