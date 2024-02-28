@@ -19,7 +19,8 @@ namespace Dragon_WebApi.DataAccess
 
         public List<CampaignMessage> GetCampaignMessages(int campaignId)
         {
-            var campaignMessagesQuery = _connection.Query<CampaignMessage>($@"
+            var sqlParameters = new { CampaignId = campaignId };
+            var campaignMessagesQuery = $@"
                             SELECT
                             CM.Id,
                             CM.CampaignId,
@@ -30,16 +31,21 @@ namespace Dragon_WebApi.DataAccess
                             CM.CreationDate
                             FROM CampaignMessages CM
                             INNER JOIN Users U ON U.Id=CM.UserId
-                            WHERE CM.CampaignId='{campaignId}';").ToList();
+                            WHERE CM.CampaignId=@CampaignId;";
 
-            return campaignMessagesQuery;
+            var campaignMessages = _connection.Query<CampaignMessage>(campaignMessagesQuery, sqlParameters).ToList();
+
+            return campaignMessages;
         }
 
         public void CreateCampaignMessage(int campaignId, int userId, string messageText, bool isPrivate)
         {
-            _connection.Query($@"
+            var sqlParameters = new { CampaignId = campaignId, UserId = userId, MessageText = messageText, IsPrivate = isPrivate, CreationDate = DateTime.Now.ToString() };
+            var createCampaignMessage = $@"
                             INSERT INTO CampaignMessages (CampaignId, UserId, MessageText, IsPrivate, CreationDate)
-                            Values ('{campaignId}', '{userId}', '{messageText}', '{isPrivate}', CURRENT_TIMESTAMP);");
+                            Values (@CampaignId, @UserId, @MessageText, @IsPrivate, @CreationDate);";
+
+            _connection.Query(createCampaignMessage, sqlParameters);
         }
     }
 }
