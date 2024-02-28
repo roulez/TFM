@@ -19,7 +19,8 @@ namespace Dragon_WebApi.DataAccess
 
         public List<Message> GetUserMessages(int userId)
         {
-            var userMessagesQuery = _connection.Query<Message>($@"
+            var sqlParameters = new { UserId = userId };
+            var userMessagesQuery = $@"
                             SELECT
                             M.Id AS Id,
                             M.MessageTitle AS MessageTitle,
@@ -36,17 +37,22 @@ namespace Dragon_WebApi.DataAccess
                             FROM Messages M
                             INNER JOIN Users SU ON SU.Id=M.SendingUserId
                             INNER JOIN Users RU ON RU.Id=M.ReceivingUserId
-                            WHERE M.ReceivingUserId='{userId}' OR M.SendingUserId='{userId}'
-                            ORDER BY M.CreationDate DESC;").ToList();
+                            WHERE M.ReceivingUserId=@UserId OR M.SendingUserId=@UserId
+                            ORDER BY M.CreationDate DESC;";
 
-            return userMessagesQuery;
+            var userMessages = _connection.Query<Message>(userMessagesQuery, sqlParameters).ToList();
+
+            return userMessages;
         }
 
         public void CreateUserMessage(string messageTitle, string messageText, int sendingUserId, int receivingUserId)
         {
-            _connection.Query($@"
+            var sqlParameters = new { MessageTitle = messageTitle, MessageText = messageText, SendingUserId = sendingUserId, ReceivingUserId = receivingUserId, CreationDate = DateTime.Now.ToString() };
+            var createUserMessageQuery = $@"
                             INSERT INTO Messages (MessageTitle, MessageText, SendingUserId, ReceivingUserId, CreationDate)
-                            Values ('{messageTitle}', '{messageText}', '{sendingUserId}', {receivingUserId}, CURRENT_TIMESTAMP);");
+                            Values (@MessageTitle, @MessageText, @SendingUserId, @ReceivingUserId, @CreationDate);";
+
+            _connection.Query(createUserMessageQuery, sqlParameters);
         }
     }
 }
