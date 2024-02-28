@@ -20,21 +20,24 @@ namespace Dragon_WebApi.DataAccess
         public LoginResult IsValidLogin(string userEmail, string userPassword)
         {
             var loginResult = new LoginResult();
+            var sqlParameters = new { UserEmail = userEmail };
 
-            var loginQuery = _connection.Query<User>($@"
+            var loginQuery = $@"
                             SELECT
                             Id,
                             UserEmail,
                             UserPassword
                             FROM Users
-                            WHERE UserEmail='{userEmail}';").FirstOrDefault();
+                            WHERE UserEmail=@UserEmail;";
 
-            if (loginQuery == null)
+            var userResult = _connection.Query<User>(loginQuery, sqlParameters).FirstOrDefault();
+
+            if (userResult == null)
                 loginResult.IsEmailCorrect = false;
             else
             {
-                loginResult.Id = loginQuery.Id;
-                loginResult.IsPasswordCorrect = userPassword == loginQuery.UserPassword;
+                loginResult.Id = userResult.Id;
+                loginResult.IsPasswordCorrect = userPassword == userResult.UserPassword;
             }
 
             return loginResult;
@@ -42,38 +45,48 @@ namespace Dragon_WebApi.DataAccess
 
         public bool RegisterUser(string userEmail, string userPassword, string userName, string userSurname)
         {
-            var userEmailExistsQuery = _connection.Query<User>($@"
+            var sqlParameters = new { UserEmail = userEmail };
+            var userEmailExistsQuery = $@"
                             SELECT
                             UserEmail
                             FROM Users
-                            WHERE UserEmail='{userEmail}';").FirstOrDefault();
+                            WHERE UserEmail=@UserEmail;";
 
-            if (userEmailExistsQuery != null)
+            var userQueryResult = _connection.Query<User>(userEmailExistsQuery, sqlParameters).FirstOrDefault();
+
+            if (userQueryResult != null)
                 return false;
             else
             {
-                _connection.Query($@"INSERT INTO Users (UserEmail, UserPassword, UserName, UserSurname)
-                    Values ('{userEmail}', '{userPassword}', '{userName}', '{userSurname}');");
+                var sqlCreateParameters = new { UserEmail = userEmail, UserPassword = userPassword, UserName = userName, UserSurname = userSurname };
+                var registerUserQuery = $@"INSERT INTO Users (UserEmail, UserPassword, UserName, UserSurname)
+                    Values (@UserEmail, @UserPassword, @UserName, @UserSurname);";
+
+                _connection.Query(registerUserQuery, sqlCreateParameters);
                 return true;
             }
         }
 
         public List<User> GetUsers()
         {
-            var usersQuery = _connection.Query<User>($@"
+            var usersQuery = $@"
                             SELECT
                             Id,
                             UserEmail,
                             UserName,
                             UserSurname
-                            FROM Users;").ToList();
+                            FROM Users;";
 
-            return usersQuery;
+            var userList = _connection.Query<User>(usersQuery).ToList();
+
+            return userList;
         }
 
         public List<User> GetUsersFromCampaign(int campaignId)
         {
-            var usersQuery = _connection.Query<User>($@"
+            var sqlParameters = new { CampaignId = campaignId };
+
+            var usersFromCampaignQuery = $@"
                             SELECT
                             U.Id,
                             U.UserEmail,
@@ -82,14 +95,18 @@ namespace Dragon_WebApi.DataAccess
                             CU.UserRole AS CampaignRole
                             FROM Users U
                             INNER JOIN CampaignsUsers CU ON CU.UserId=U.Id
-                            WHERE CU.CampaignId='{campaignId}';").ToList();
+                            WHERE CU.CampaignId=@CampaignId;";
 
-            return usersQuery;
+            var usersFromCampaign = _connection.Query<User>(usersFromCampaignQuery, sqlParameters).ToList();
+
+            return usersFromCampaign;
         }
 
         public User GetUserCampaignData(int campaignId, int userId)
         {
-            var userCampaignQuery = _connection.Query<User>($@"
+            var sqlParameters = new { CampaignId = campaignId, UserId = userId };
+
+            var userCampaignDataQuery = $@"
                             SELECT
                             U.Id,
                             U.UserEmail,
@@ -98,9 +115,11 @@ namespace Dragon_WebApi.DataAccess
                             CU.UserRole AS CampaignRole
                             FROM Users U
                             INNER JOIN CampaignsUsers CU ON CU.UserId=U.Id
-                            WHERE CU.CampaignId='{campaignId}' AND U.ID='{userId}';").FirstOrDefault();
+                            WHERE CU.CampaignId=@CampaignId AND U.ID=@UserId;";
 
-            return userCampaignQuery;
+            var userCampaignData = _connection.Query<User>(userCampaignDataQuery, sqlParameters).FirstOrDefault();
+
+            return userCampaignData;
         }
     }
 }
