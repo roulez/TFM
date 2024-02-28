@@ -19,76 +19,99 @@ namespace Dragon_WebApi.DataAccess
 
         public Campaign GetCampaignData(int campaignId)
         {
-            var campaignDataQuery = _connection.Query<Campaign>($@"
+            var sqlParameters = new { CampaignId = campaignId };
+            var campaignDataQuery = $@"
                             SELECT 
                             Id,
                             CampaignName,
                             CampaignImage
                             FROM Campaigns
-                            WHERE Id='{campaignId}';").FirstOrDefault();
+                            WHERE Id=@CampaignId;";
 
-            return campaignDataQuery;
+            var campaignDataResult = _connection.Query<Campaign>(campaignDataQuery, sqlParameters).FirstOrDefault();
+
+            return campaignDataResult;
         }
 
         public int CreateCampaign(string campaignName, int userId)
         {
-            var createCampaignId = _connection.QuerySingle<int>($@"
+            var sqlParameters = new { CampaignName = campaignName, CampaignImage = "../../../assets/images/login-screen.jpg", UserId = userId, CreationDate = DateTime.Now.ToString()};
+            var createCampaignQuery = $@"
                             INSERT INTO Campaigns (CampaignName, CampaignImage, UserId, CreationDate)
                             OUTPUT INSERTED.Id 
-                            Values ('{campaignName}', '../../../assets/images/login-screen.jpg', '{userId}', CURRENT_TIMESTAMP);");
+                            Values (@CampaignName, @CampaignImage, @UserId, @CreationDate);";
 
-            return createCampaignId;
+            var createdCampaignId = _connection.QuerySingle<int>(createCampaignQuery, sqlParameters);
+
+            return createdCampaignId;
         }
 
         public int AddUserToCampaign(int campaignId, int userId, int userRole)
         {
-            var createCampaignUserId = _connection.QuerySingle<int>($@"
+            var sqlParameters = new { UserId = userId, CampaignId = campaignId, UserRole = userRole };
+            var createCampaignUserQuery = $@"
                         INSERT INTO CampaignsUsers (UserId, CampaignId, UserRole)
                         OUTPUT INSERTED.Id 
-                        Values ('{userId}', '{campaignId}', '{userRole}');");
-            return createCampaignUserId;
+                        Values (@UserId, @CampaignId, @UserRole);";
+
+            var createdCampaignUserId = _connection.QuerySingle<int>(createCampaignUserQuery, sqlParameters);
+
+            return createdCampaignUserId;
         }
 
         public List<Campaign> GetUserCampaigns(int userId)
         {
-            var userCampaignsQuery = _connection.Query<Campaign>($@"
+            var sqlParameters = new { UserId = userId };
+            var userCampaignsQuery = $@"
                             SELECT 
                             C.Id,
                             C.CampaignName,
                             C.CampaignImage
                             FROM Campaigns C
-                            WHERE EXISTS (SELECT * FROM CampaignsUsers CU WHERE CU.CampaignId=C.Id AND CU.UserId='{userId}')").ToList();
+                            WHERE EXISTS (SELECT * FROM CampaignsUsers CU WHERE CU.CampaignId=C.Id AND CU.UserId=@UserId)";
 
-            return userCampaignsQuery;
+            var userCampaigns = _connection.Query<Campaign>(userCampaignsQuery, sqlParameters).ToList();
+
+            return userCampaigns;
         }
 
         public bool IsUserPartOfTheCampaign(int campaignId, int userId)
         {
-            var isUserFromCampaignQuery = _connection.Query<Campaign>($@"
+            var sqlParameters = new { UserId = userId, CampaignId = campaignId };
+            var isUserFromCampaignQuery = $@"
                             SELECT 
                             Id
                             FROM CampaignsUsers
-                            WHERE UserId='{userId}' AND CampaignId='{campaignId}';").FirstOrDefault();
+                            WHERE UserId=@UserId AND CampaignId=@CampaignId;";
 
-            return isUserFromCampaignQuery != null;
+            var userFromCampaign = _connection.Query<Campaign>(isUserFromCampaignQuery, sqlParameters).FirstOrDefault();
+
+            return userFromCampaign != null;
         }
 
         public void UpdateCampaign(int campaignId, string campaignName)
         {
-            _connection.Query($@"
+            var sqlParameters = new { CampaignName = campaignName, CampaignId = campaignId };
+            var updateCampaignQuery = $@"
                             UPDATE Campaigns
-                            SET CampaignName='{campaignName}'
-                            WHERE ID='{campaignId}';");
+                            SET CampaignName=@CampaignName
+                            WHERE ID=@CampaignId;";
+
+            _connection.Query(updateCampaignQuery, sqlParameters);
         }
 
         public void DeleteCampaignUsers(int campaignId)
         {
-            _connection.Query($@"DELETE FROM CampaignsUsers WHERE CampaignId='{campaignId}';");
+            var sqlParameters = new { CampaignId = campaignId };
+            var deleteCampaignUsersQuery = $@"DELETE FROM CampaignsUsers WHERE CampaignId=@CampaignId;";
+            _connection.Query(deleteCampaignUsersQuery, sqlParameters);
         }
 
         public void DeleteCampaign(int campaignId)
         {
-            _connection.Query($@"DELETE FROM Campaigns WHERE ID='{campaignId}';");
+            var sqlParameters = new { CampaignId = campaignId };
+            var deleteCampaignQuery = $@"DELETE FROM Campaigns WHERE ID=@CampaignId;";
+            _connection.Query(deleteCampaignQuery, sqlParameters);
         }
     }
 }
